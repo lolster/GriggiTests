@@ -4,9 +4,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class launch {
 
 	public static void main(String[] args) {
-
+		
 		// Create a new instance of Chrome Browser
-		WebDriver driver = new ChromeDriver();
+		/*WebDriver driver = new ChromeDriver();
 		System.out.println("Launching Chromium [OK]");
 		// Maximize the Browser window
 		driver.manage().window().maximize();
@@ -32,5 +32,12 @@ public class launch {
 		passElement.submit();
 		
 		driver.quit();
+		*/
+		
+		WebDriver driver = new ChromeDriver();
+		
+		driver.get("http://google.com");
+		driver.get("http://youtube.com");
+		driver.close();
 	}
 }

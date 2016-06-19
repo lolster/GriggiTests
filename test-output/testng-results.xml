@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="9" passed="9">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Suite" duration-ms="4741" started-at="2016-06-19T07:06:14Z" finished-at="2016-06-19T07:06:18Z">
+    <groups>
+    </groups>
+    <test name="Test" duration-ms="4741" started-at="2016-06-19T07:06:14Z" finished-at="2016-06-19T07:06:18Z">
+      <class name="com.griggi.app.MainTest">
+        <test-method status="PASS" signature="beforeTest(org.testng.ITestContext)[pri:0, instance:com.griggi.app.MainTest@263c7e3f]" name="beforeTest" is-config="true" duration-ms="1467" started-at="2016-06-19T12:36:14Z" finished-at="2016-06-19T12:36:15Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@765be168]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="loginBad1()[pri:0, instance:com.griggi.app.MainTest@263c7e3f]" name="loginBad1" duration-ms="831" started-at="2016-06-19T12:36:15Z" description="Logging in. - Too long" finished-at="2016-06-19T12:36:16Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginBad1 -->
+        <test-method status="PASS" signature="loginBad2()[pri:0, instance:com.griggi.app.MainTest@263c7e3f]" name="loginBad2" duration-ms="377" started-at="2016-06-19T12:36:16Z" description="Logging in. - Too short" finished-at="2016-06-19T12:36:16Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginBad2 -->
+        <test-method status="PASS" signature="loginBad3()[pri:0, instance:com.griggi.app.MainTest@263c7e3f]" name="loginBad3" duration-ms="446" started-at="2016-06-19T12:36:16Z" description="Logging in. - Invalid" finished-at="2016-06-19T12:36:17Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginBad3 -->
+        <test-method status="PASS" signature="loginGood()[pri:0, instance:com.griggi.app.MainTest@263c7e3f]" name="loginGood" duration-ms="918" started-at="2016-06-19T12:36:17Z" description="Logging in. - GOOD" finished-at="2016-06-19T12:36:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginGood -->
+        <test-method status="PASS" signature="dashboardUICheck1()[pri:0, instance:com.griggi.app.MainTest@263c7e3f]" name="dashboardUICheck1" duration-ms="42" started-at="2016-06-19T12:36:18Z" description="Check Dashboard UI - 1 (Nav)" finished-at="2016-06-19T12:36:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- dashboardUICheck1 -->
+        <test-method status="PASS" signature="dashboardUICheck2()[pri:0, instance:com.griggi.app.MainTest@263c7e3f]" name="dashboardUICheck2" duration-ms="18" started-at="2016-06-19T12:36:18Z" description="Check Dashboard UI - 2 (Widgets)" finished-at="2016-06-19T12:36:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- dashboardUICheck2 -->
+        <test-method status="PASS" signature="dashboardUICheck3()[pri:0, instance:com.griggi.app.MainTest@263c7e3f]" name="dashboardUICheck3" duration-ms="26" started-at="2016-06-19T12:36:18Z" description="Check Dashboard UI - 3 (Header)" finished-at="2016-06-19T12:36:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- dashboardUICheck3 -->
+        <test-method status="PASS" signature="verifyLatestNodeURL()[pri:0, instance:com.griggi.app.MainTest@263c7e3f]" name="verifyLatestNodeURL" duration-ms="188" started-at="2016-06-19T12:36:18Z" description="Verify the url for the lastest node on dashboard" finished-at="2016-06-19T12:36:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyLatestNodeURL -->
+        <test-method status="PASS" signature="listOfNodes()[pri:0, instance:com.griggi.app.MainTest@263c7e3f]" name="listOfNodes" duration-ms="264" started-at="2016-06-19T12:36:18Z" description="Verify Nav from database - List of nodes" finished-at="2016-06-19T12:36:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- listOfNodes -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:com.griggi.app.MainTest@263c7e3f]" name="afterTest" is-config="true" duration-ms="90" started-at="2016-06-19T12:36:18Z" finished-at="2016-06-19T12:36:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+      </class> <!-- com.griggi.app.MainTest -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>
