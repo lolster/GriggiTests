@@ -14,7 +14,8 @@
 				<include name="loginBad1" />
 				<include name="loginBad2" />
 				<include name="loginBad3" />
-				<include name="loginGood" />
+				<include name="loginGood1" />
+				<include name="loginGood2" />
 				<include name="dashboardUICheck1" />
 				<include name="dashboardUICheck2" />
 				<include name="dashboardUICheck3" />

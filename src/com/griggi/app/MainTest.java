@@ -65,7 +65,7 @@ public class MainTest {
 	}
 
 	@Test(description = "Logging in. - GOOD")
-	public void loginGood() {
+	public void loginGood1() {
 		driver.get(URL);
 		mobileElement = driver.findElement(By.id("pocha_pocha_mobile"));
 		mobileElement.sendKeys(USERNAME);
@@ -79,9 +79,48 @@ public class MainTest {
 		mobileElement.submit();
 
 		// wait to get confirmation that it is loaded
-		// TODO: put appropriate selector
-		// (new WebDriverWait(driver, TIMEOUT_SEC))
-		// .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#apAuthLocalUser_password")));
+		(new WebDriverWait(driver, TIMEOUT_SEC))
+				.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("aside#menu div#navigation div.profile-picture div.stats-label div.dropdown a.dropdown-toggle small.text-muted span.text-success")));
+	}
+
+	@Test(description = "Verifies that after a bad login, user can enter")
+	public void loginGood2() {
+		/*
+		 * Login as a user Enter a bad password initially Enter a good password
+		 * later after realising that password was wrong Ensure that page has
+		 * loaded
+		 */
+		driver.get(URL);
+		mobileElement = driver.findElement(By.id("pocha_pocha_mobile"));
+		mobileElement.sendKeys(USERNAME);
+		mobileElement.submit();
+
+		// wait for password input
+		(new WebDriverWait(driver, TIMEOUT_SEC))
+				.until(ExpectedConditions.presenceOfElementLocated(By.id("apAuthLocalUser_password")));
+
+		// enter wrong password
+		String badPasswordPostfix = "asdf";
+		mobileElement = driver.findElement(By.id("apAuthLocalUser_password"));
+		mobileElement.sendKeys(PASSWORD + badPasswordPostfix);
+		mobileElement.submit();
+
+		// ensure that the user is notified of error in authentication
+		// i.e., make sure that red point is there and error message is correct
+		(new WebDriverWait(driver, TIMEOUT_SEC))
+				.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("ul.error_list li:nth-child(1)")));
+		mobileElement = driver.findElement(By.cssSelector("ul.error_list li:nth-child(1)"));
+		Assert.assertEquals("The password you entered is not valid.", mobileElement.getText());
+
+		// enter good password
+		mobileElement = driver.findElement(By.id("apAuthLocalUser_password"));
+		mobileElement.sendKeys(PASSWORD);
+		mobileElement.submit();
+
+		// verify user has logged in and is seeing their dashboard
+		// searches for the profile picture element
+		(new WebDriverWait(driver, TIMEOUT_SEC)).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(
+				"aside#menu div#navigation div.profile-picture div.stats-label div.dropdown a.dropdown-toggle small.text-muted span.text-success")));
 	}
 
 	@Test(description = "Check Dashboard UI - 1 (Nav)")
@@ -106,11 +145,14 @@ public class MainTest {
 		(new WebDriverWait(driver, TIMEOUT_SEC))
 				.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div#header")));
 	}
-	
+
 	@Test(description = "Verify Nav from database - List of nodes")
 	public void listOfNodes() {
-		//String query = "select name from nodes where id in (select distinct node_id from connections where identity = '9538155667' order by id desc);";
-		String query = "select distinct nodes.mass_transit_info from nodes inner join connections on nodes.id = connections.node_id where connections.identity = '" + USERNAME + "' order by connections.id desc;";
+		// String query = "select name from nodes where id in (select distinct
+		// node_id from connections where identity = '9538155667' order by id
+		// desc);";
+		String query = "select distinct nodes.mass_transit_info from nodes inner join connections on nodes.id = connections.node_id where connections.identity = '"
+				+ USERNAME + "' order by connections.id desc;";
 		SQLHandler sh = null;
 		List<String> nodeList = null;
 		try {
@@ -120,13 +162,16 @@ public class MainTest {
 			e.printStackTrace();
 		}
 		int i = 1;
-		for(String e : nodeList) {
-			System.out.println(driver.findElement(By.cssSelector("ul#side-menu li:nth-child(" + i + ") a span")).getText());
-			Assert.assertEquals(e.toLowerCase(), driver.findElement(By.cssSelector("ul#side-menu li:nth-child(" + i + ") a span")).getText().toLowerCase() );
+		for (String e : nodeList) {
+			// System.out.println(driver.findElement(By.cssSelector("ul#side-menu
+			// li:nth-child(" + i + ") a span")).getText());
+			Assert.assertEquals(e.toLowerCase(),
+					driver.findElement(By.cssSelector("ul#side-menu li:nth-child(" + i + ") a span")).getText()
+							.toLowerCase());
 			i++;
 		}
 	}
-	
+
 	@Test(description = "Verify the url for the lastest node on dashboard")
 	public void verifyLatestNodeURL() {
 		String query = "select distinct node_id from connections where identity = '9538155667' order by id desc limit 1;";
@@ -141,7 +186,7 @@ public class MainTest {
 		}
 		Assert.assertEquals(URL + "/node/" + nodeId, currentUrl);
 	}
-	
+
 	@BeforeTest(alwaysRun = true)
 	public void beforeTest(ITestContext context) {
 		// Reference to Chrome
