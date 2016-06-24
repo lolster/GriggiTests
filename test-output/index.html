@@ -23,7 +23,7 @@
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
       <br/>
-      <span class="top-banner-font-1">1 suite, 1 failed test</span>
+      <span class="top-banner-font-1">1 suite, 2 failed tests</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -90,7 +90,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">10 methods, 1 failed,   9 passed</span>
+                    <span class="method-stats">11 methods, 2 failed,   9 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title failed">Failed methods</span>
@@ -102,6 +102,11 @@
                       <span>
                         <img width="3%" src="failed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.griggi.app.MainTest" hash-for-method="loginGood2">loginGood2</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="failed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.griggi.app.MainTest" hash-for-method="nodeAdminDropdownArrow">nodeAdminDropdownArrow</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Suite -->
@@ -181,29 +186,31 @@
                   <a name="loginGood2">
                   </a> <!-- loginGood2 -->
                   <span class="method-name">loginGood2</span>
-                  <div class="stack-trace">org.openqa.selenium.NoSuchElementException: no such element
-  (Session info: chrome=37.0.2062.120)
-  (Driver info: chromedriver=2.12.301324 (de8ab311bc9374d0ade71f7c167bad61848c7c48),platform=Linux 3.13.0-88-generic x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 25 milliseconds
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
-Build info: version: &apos;2.53.0&apos;, revision: &apos;35ae25b&apos;, time: &apos;2016-03-15 16:57:40&apos;
-System info: host: &apos;sushi-ubuntu12&apos;, ip: &apos;127.0.1.1&apos;, os.name: &apos;Linux&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;3.13.0-88-generic&apos;, java.version: &apos;1.7.0_101&apos;
-*** Element info: {Using=id, value=pocha_pocha_mobile}
-Session ID: 46c4d267c08aefd4b526f450ba965154
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities [{platform=LINUX, acceptSslCerts=true, javascriptEnabled=true, browserName=chrome, chrome={userDataDir=/tmp/.com.google.Chrome.kxaDc3}, rotatable=false, locationContextEnabled=true, mobileEmulationEnabled=false, version=37.0.2062.120, takesHeapSnapshot=true, cssSelectorsEnabled=true, databaseEnabled=false, handlesAlerts=true, browserConnectionEnabled=false, webStorageEnabled=true, nativeEvents=true, applicationCacheEnabled=false, takesScreenshot=true}]
-	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)
-	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:413)
-	at org.openqa.selenium.By$ById.findElement(By.java:218)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)
-	at com.griggi.app.MainTest.loginGood2(MainTest.java:94)
-... Removed 28 stack frames
+                  <div class="stack-trace">org.junit.ComparisonFailure: expected:&lt;[The password you entered is not valid.]&gt; but was:&lt;[]&gt;
+	at org.junit.Assert.assertEquals(Assert.java:115)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at com.griggi.app.MainTest.loginGood2(MainTest.java:116)
+... Removed 24 stack frames
 </div> <!-- stack-trace -->
                   <em>
 (Verifies that after a bad login, user can enter)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="nodeAdminDropdownArrow">
+                  </a> <!-- nodeAdminDropdownArrow -->
+                  <span class="method-name">nodeAdminDropdownArrow</span>
+                  <div class="stack-trace">java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:86)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at org.junit.Assert.assertFalse(Assert.java:64)
+	at org.junit.Assert.assertFalse(Assert.java:74)
+	at com.griggi.app.MainTest.nodeAdminDropdownArrow(MainTest.java:204)
+... Removed 24 stack frames
+</div> <!-- stack-trace -->
+                  <em>
+(Admin node arrow exists)                  </em>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -320,13 +327,14 @@ Capabilities [{platform=LINUX, acceptSslCerts=true, javascriptEnabled=true, brow
           &lt;include name=&quot;loginBad1&quot;/&gt;
           &lt;include name=&quot;loginBad2&quot;/&gt;
           &lt;include name=&quot;loginBad3&quot;/&gt;
-          &lt;include name=&quot;loginGood1&quot;/&gt;
           &lt;include name=&quot;loginGood2&quot;/&gt;
+          &lt;include name=&quot;loginGood1&quot;/&gt;
           &lt;include name=&quot;dashboardUICheck1&quot;/&gt;
           &lt;include name=&quot;dashboardUICheck2&quot;/&gt;
           &lt;include name=&quot;dashboardUICheck3&quot;/&gt;
           &lt;include name=&quot;verifyLatestNodeURL&quot;/&gt;
           &lt;include name=&quot;listOfNodes&quot;/&gt;
+          &lt;include name=&quot;nodeAdminDropdownArrow&quot;/&gt;
         &lt;/methods&gt;
       &lt;/class&gt; &lt;!-- com.griggi.app.MainTest --&gt;
     &lt;/classes&gt;
@@ -368,47 +376,51 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(10);
+data.addRows(11);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'loginBad1')
+data.setCell(0, 1, 'loginGood2')
 data.setCell(0, 2, 'com.griggi.app.MainTest')
-data.setCell(0, 3, 1872);
+data.setCell(0, 3, 1957);
 data.setCell(1, 0, 1)
 data.setCell(1, 1, 'loginGood1')
 data.setCell(1, 2, 'com.griggi.app.MainTest')
-data.setCell(1, 3, 1817);
+data.setCell(1, 3, 1911);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'loginBad3')
+data.setCell(2, 1, 'loginBad1')
 data.setCell(2, 2, 'com.griggi.app.MainTest')
-data.setCell(2, 3, 883);
+data.setCell(2, 3, 1411);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'verifyLatestNodeURL')
+data.setCell(3, 1, 'loginBad3')
 data.setCell(3, 2, 'com.griggi.app.MainTest')
-data.setCell(3, 3, 875);
+data.setCell(3, 3, 999);
 data.setCell(4, 0, 4)
 data.setCell(4, 1, 'loginBad2')
 data.setCell(4, 2, 'com.griggi.app.MainTest')
-data.setCell(4, 3, 868);
+data.setCell(4, 3, 846);
 data.setCell(5, 0, 5)
-data.setCell(5, 1, 'loginGood2')
+data.setCell(5, 1, 'verifyLatestNodeURL')
 data.setCell(5, 2, 'com.griggi.app.MainTest')
-data.setCell(5, 3, 374);
+data.setCell(5, 3, 318);
 data.setCell(6, 0, 6)
 data.setCell(6, 1, 'listOfNodes')
 data.setCell(6, 2, 'com.griggi.app.MainTest')
-data.setCell(6, 3, 160);
+data.setCell(6, 3, 231);
 data.setCell(7, 0, 7)
 data.setCell(7, 1, 'dashboardUICheck1')
 data.setCell(7, 2, 'com.griggi.app.MainTest')
-data.setCell(7, 3, 123);
+data.setCell(7, 3, 77);
 data.setCell(8, 0, 8)
 data.setCell(8, 1, 'dashboardUICheck3')
 data.setCell(8, 2, 'com.griggi.app.MainTest')
-data.setCell(8, 3, 38);
+data.setCell(8, 3, 63);
 data.setCell(9, 0, 9)
 data.setCell(9, 1, 'dashboardUICheck2')
 data.setCell(9, 2, 'com.griggi.app.MainTest')
-data.setCell(9, 3, 31);
+data.setCell(9, 3, 34);
+data.setCell(10, 0, 10)
+data.setCell(10, 1, 'nodeAdminDropdownArrow')
+data.setCell(10, 2, 'com.griggi.app.MainTest')
+data.setCell(10, 3, 24);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
@@ -441,54 +453,60 @@ return data;
             <div class="chronological-class">
               <div class="chronological-class-name">com.griggi.app.MainTest</div> <!-- chronological-class-name -->
               <div class="configuration-test before">
-                <span class="method-name">beforeTest(org.testng.TestRunner@1f124d61)</span>
+                <span class="method-name">beforeTest(org.testng.TestRunner@6e4a6525)</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-test before -->
               <div class="test-method">
                 <span class="method-name">loginBad1</span>
-                <span class="method-start">11088 ms</span>
+                <span class="method-start">1928 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">loginBad2</span>
-                <span class="method-start">12987 ms</span>
+                <span class="method-start">3354 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">loginBad3</span>
-                <span class="method-start">13867 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">loginGood1</span>
-                <span class="method-start">14753 ms</span>
+                <span class="method-start">4218 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
                 <span class="method-name">loginGood2</span>
-                <span class="method-start">16573 ms</span>
+                <span class="method-start">5232 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">loginGood1</span>
+                <span class="method-start">7205 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">dashboardUICheck1</span>
-                <span class="method-start">17003 ms</span>
+                <span class="method-start">9120 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">dashboardUICheck2</span>
-                <span class="method-start">17129 ms</span>
+                <span class="method-start">9201 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">dashboardUICheck3</span>
-                <span class="method-start">17173 ms</span>
+                <span class="method-start">9247 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">verifyLatestNodeURL</span>
-                <span class="method-start">17218 ms</span>
+                <span class="method-start">9315 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">listOfNodes</span>
-                <span class="method-start">18099 ms</span>
+                <span class="method-start">9637 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">nodeAdminDropdownArrow</span>
+                <span class="method-start">9871 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-test after">
                 <span class="method-name">afterTest</span>
-                <span class="method-start">18264 ms</span>
+                <span class="method-start">9914 ms</span>
               </div> <!-- configuration-test after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

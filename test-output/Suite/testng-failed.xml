@@ -12,6 +12,7 @@
       <class name="com.griggi.app.MainTest">
         <methods>
           <include name="beforeTest"/>
+          <include name="nodeAdminDropdownArrow"/>
           <include name="afterTest"/>
           <include name="loginGood2"/>
         </methods>
