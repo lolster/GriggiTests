@@ -1,78 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="1" total="10" passed="9">
+<testng-results skipped="0" failed="2" total="11" passed="9">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="19087" started-at="2016-06-20T14:22:44Z" finished-at="2016-06-20T14:23:03Z">
+  <suite name="Suite" duration-ms="10102" started-at="2016-06-24T06:59:09Z" finished-at="2016-06-24T06:59:19Z">
     <groups>
     </groups>
-    <test name="Test" duration-ms="19087" started-at="2016-06-20T14:22:44Z" finished-at="2016-06-20T14:23:03Z">
+    <test name="Test" duration-ms="10102" started-at="2016-06-24T06:59:09Z" finished-at="2016-06-24T06:59:19Z">
       <class name="com.griggi.app.MainTest">
-        <test-method status="PASS" signature="beforeTest(org.testng.ITestContext)[pri:0, instance:com.griggi.app.MainTest@12c03f7e]" name="beforeTest" is-config="true" duration-ms="11081" started-at="2016-06-20T19:52:44Z" finished-at="2016-06-20T19:52:55Z">
+        <test-method status="PASS" signature="beforeTest(org.testng.ITestContext)[pri:0, instance:com.griggi.app.MainTest@27c549b9]" name="beforeTest" is-config="true" duration-ms="1903" started-at="2016-06-24T12:29:09Z" finished-at="2016-06-24T12:29:11Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@1f124d61]]>
+                <![CDATA[org.testng.TestRunner@6e4a6525]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeTest -->
-        <test-method status="PASS" signature="loginBad1()[pri:0, instance:com.griggi.app.MainTest@12c03f7e]" name="loginBad1" duration-ms="1872" started-at="2016-06-20T19:52:55Z" description="Logging in. - Too long" finished-at="2016-06-20T19:52:57Z">
+        <test-method status="PASS" signature="loginBad1()[pri:0, instance:com.griggi.app.MainTest@27c549b9]" name="loginBad1" duration-ms="1411" started-at="2016-06-24T12:29:11Z" description="Logging in. - Too long" finished-at="2016-06-24T12:29:12Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginBad1 -->
-        <test-method status="PASS" signature="loginBad2()[pri:0, instance:com.griggi.app.MainTest@12c03f7e]" name="loginBad2" duration-ms="868" started-at="2016-06-20T19:52:57Z" description="Logging in. - Too short" finished-at="2016-06-20T19:52:58Z">
+        <test-method status="PASS" signature="loginBad2()[pri:0, instance:com.griggi.app.MainTest@27c549b9]" name="loginBad2" duration-ms="846" started-at="2016-06-24T12:29:12Z" description="Logging in. - Too short" finished-at="2016-06-24T12:29:13Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginBad2 -->
-        <test-method status="PASS" signature="loginBad3()[pri:0, instance:com.griggi.app.MainTest@12c03f7e]" name="loginBad3" duration-ms="883" started-at="2016-06-20T19:52:58Z" description="Logging in. - Invalid" finished-at="2016-06-20T19:52:59Z">
+        <test-method status="PASS" signature="loginBad3()[pri:0, instance:com.griggi.app.MainTest@27c549b9]" name="loginBad3" duration-ms="999" started-at="2016-06-24T12:29:13Z" description="Logging in. - Invalid" finished-at="2016-06-24T12:29:14Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginBad3 -->
-        <test-method status="PASS" signature="loginGood1()[pri:0, instance:com.griggi.app.MainTest@12c03f7e]" name="loginGood1" duration-ms="1817" started-at="2016-06-20T19:52:59Z" description="Logging in. - GOOD" finished-at="2016-06-20T19:53:01Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- loginGood1 -->
-        <test-method status="FAIL" signature="loginGood2()[pri:0, instance:com.griggi.app.MainTest@12c03f7e]" name="loginGood2" duration-ms="374" started-at="2016-06-20T19:53:01Z" description="Verifies that after a bad login, user can enter" finished-at="2016-06-20T19:53:01Z">
-          <exception class="org.openqa.selenium.NoSuchElementException">
+        <test-method status="FAIL" signature="loginGood2()[pri:0, instance:com.griggi.app.MainTest@27c549b9]" name="loginGood2" duration-ms="1957" started-at="2016-06-24T12:29:14Z" description="Verifies that after a bad login, user can enter" finished-at="2016-06-24T12:29:16Z">
+          <exception class="org.junit.ComparisonFailure">
             <message>
-              <![CDATA[no such element
-  (Session info: chrome=37.0.2062.120)
-  (Driver info: chromedriver=2.12.301324 (de8ab311bc9374d0ade71f7c167bad61848c7c48),platform=Linux 3.13.0-88-generic x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 25 milliseconds
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
-Build info: version: '2.53.0', revision: '35ae25b', time: '2016-03-15 16:57:40'
-System info: host: 'sushi-ubuntu12', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '3.13.0-88-generic', java.version: '1.7.0_101'
-*** Element info: {Using=id, value=pocha_pocha_mobile}
-Session ID: 46c4d267c08aefd4b526f450ba965154
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities [{platform=LINUX, acceptSslCerts=true, javascriptEnabled=true, browserName=chrome, chrome={userDataDir=/tmp/.com.google.Chrome.kxaDc3}, rotatable=false, locationContextEnabled=true, mobileEmulationEnabled=false, version=37.0.2062.120, takesHeapSnapshot=true, cssSelectorsEnabled=true, databaseEnabled=false, handlesAlerts=true, browserConnectionEnabled=false, webStorageEnabled=true, nativeEvents=true, applicationCacheEnabled=false, takesScreenshot=true}]]]>
+              <![CDATA[expected:<[The password you entered is not valid.]> but was:<[]>]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element
-  (Session info: chrome=37.0.2062.120)
-  (Driver info: chromedriver=2.12.301324 (de8ab311bc9374d0ade71f7c167bad61848c7c48),platform=Linux 3.13.0-88-generic x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 25 milliseconds
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
-Build info: version: '2.53.0', revision: '35ae25b', time: '2016-03-15 16:57:40'
-System info: host: 'sushi-ubuntu12', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '3.13.0-88-generic', java.version: '1.7.0_101'
-*** Element info: {Using=id, value=pocha_pocha_mobile}
-Session ID: 46c4d267c08aefd4b526f450ba965154
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities [{platform=LINUX, acceptSslCerts=true, javascriptEnabled=true, browserName=chrome, chrome={userDataDir=/tmp/.com.google.Chrome.kxaDc3}, rotatable=false, locationContextEnabled=true, mobileEmulationEnabled=false, version=37.0.2062.120, takesHeapSnapshot=true, cssSelectorsEnabled=true, databaseEnabled=false, handlesAlerts=true, browserConnectionEnabled=false, webStorageEnabled=true, nativeEvents=true, applicationCacheEnabled=false, takesScreenshot=true}]
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:526)
-	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)
-	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:413)
-	at org.openqa.selenium.By$ById.findElement(By.java:218)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)
-	at com.griggi.app.MainTest.loginGood2(MainTest.java:94)
+              <![CDATA[org.junit.ComparisonFailure: expected:<[The password you entered is not valid.]> but was:<[]>
+	at org.junit.Assert.assertEquals(Assert.java:115)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at com.griggi.app.MainTest.loginGood2(MainTest.java:116)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -99,31 +66,74 @@ Capabilities [{platform=LINUX, acceptSslCerts=true, javascriptEnabled=true, brow
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:58)
 ]]>
             </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
+          </exception> <!-- org.junit.ComparisonFailure -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginGood2 -->
-        <test-method status="PASS" signature="dashboardUICheck1()[pri:0, instance:com.griggi.app.MainTest@12c03f7e]" name="dashboardUICheck1" duration-ms="123" started-at="2016-06-20T19:53:01Z" description="Check Dashboard UI - 1 (Nav)" finished-at="2016-06-20T19:53:01Z">
+        <test-method status="PASS" signature="loginGood1()[pri:0, instance:com.griggi.app.MainTest@27c549b9]" name="loginGood1" duration-ms="1911" started-at="2016-06-24T12:29:16Z" description="Logging in. - GOOD" finished-at="2016-06-24T12:29:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginGood1 -->
+        <test-method status="PASS" signature="dashboardUICheck1()[pri:0, instance:com.griggi.app.MainTest@27c549b9]" name="dashboardUICheck1" duration-ms="77" started-at="2016-06-24T12:29:18Z" description="Check Dashboard UI - 1 (Nav)" finished-at="2016-06-24T12:29:18Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- dashboardUICheck1 -->
-        <test-method status="PASS" signature="dashboardUICheck2()[pri:0, instance:com.griggi.app.MainTest@12c03f7e]" name="dashboardUICheck2" duration-ms="31" started-at="2016-06-20T19:53:01Z" description="Check Dashboard UI - 2 (Widgets)" finished-at="2016-06-20T19:53:01Z">
+        <test-method status="PASS" signature="dashboardUICheck2()[pri:0, instance:com.griggi.app.MainTest@27c549b9]" name="dashboardUICheck2" duration-ms="34" started-at="2016-06-24T12:29:18Z" description="Check Dashboard UI - 2 (Widgets)" finished-at="2016-06-24T12:29:18Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- dashboardUICheck2 -->
-        <test-method status="PASS" signature="dashboardUICheck3()[pri:0, instance:com.griggi.app.MainTest@12c03f7e]" name="dashboardUICheck3" duration-ms="38" started-at="2016-06-20T19:53:01Z" description="Check Dashboard UI - 3 (Header)" finished-at="2016-06-20T19:53:01Z">
+        <test-method status="PASS" signature="dashboardUICheck3()[pri:0, instance:com.griggi.app.MainTest@27c549b9]" name="dashboardUICheck3" duration-ms="63" started-at="2016-06-24T12:29:18Z" description="Check Dashboard UI - 3 (Header)" finished-at="2016-06-24T12:29:18Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- dashboardUICheck3 -->
-        <test-method status="PASS" signature="verifyLatestNodeURL()[pri:0, instance:com.griggi.app.MainTest@12c03f7e]" name="verifyLatestNodeURL" duration-ms="875" started-at="2016-06-20T19:53:01Z" description="Verify the url for the lastest node on dashboard" finished-at="2016-06-20T19:53:02Z">
+        <test-method status="PASS" signature="verifyLatestNodeURL()[pri:0, instance:com.griggi.app.MainTest@27c549b9]" name="verifyLatestNodeURL" duration-ms="318" started-at="2016-06-24T12:29:18Z" description="Verify the url for the lastest node on dashboard" finished-at="2016-06-24T12:29:19Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- verifyLatestNodeURL -->
-        <test-method status="PASS" signature="listOfNodes()[pri:0, instance:com.griggi.app.MainTest@12c03f7e]" name="listOfNodes" duration-ms="160" started-at="2016-06-20T19:53:02Z" description="Verify Nav from database - List of nodes" finished-at="2016-06-20T19:53:02Z">
+        <test-method status="PASS" signature="listOfNodes()[pri:0, instance:com.griggi.app.MainTest@27c549b9]" name="listOfNodes" duration-ms="231" started-at="2016-06-24T12:29:19Z" description="Verify Nav from database - List of nodes" finished-at="2016-06-24T12:29:19Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- listOfNodes -->
-        <test-method status="PASS" signature="afterTest()[pri:0, instance:com.griggi.app.MainTest@12c03f7e]" name="afterTest" is-config="true" duration-ms="819" started-at="2016-06-20T19:53:02Z" finished-at="2016-06-20T19:53:03Z">
+        <test-method status="FAIL" signature="nodeAdminDropdownArrow()[pri:0, instance:com.griggi.app.MainTest@27c549b9]" name="nodeAdminDropdownArrow" duration-ms="24" started-at="2016-06-24T12:29:19Z" description="Admin node arrow exists" finished-at="2016-06-24T12:29:19Z">
+          <exception class="java.lang.AssertionError">
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:86)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at org.junit.Assert.assertFalse(Assert.java:64)
+	at org.junit.Assert.assertFalse(Assert.java:74)
+	at com.griggi.app.MainTest.nodeAdminDropdownArrow(MainTest.java:204)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:816)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1124)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:774)
+	at org.testng.TestRunner.run(TestRunner.java:624)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:359)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:354)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:312)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:261)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1215)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1140)
+	at org.testng.TestNG.run(TestNG.java:1048)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:137)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:58)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nodeAdminDropdownArrow -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:com.griggi.app.MainTest@27c549b9]" name="afterTest" is-config="true" duration-ms="182" started-at="2016-06-24T12:29:19Z" finished-at="2016-06-24T12:29:19Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterTest -->

@@ -1,6 +1,7 @@
 package com.griggi.app;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
@@ -21,6 +22,8 @@ public class MainTest {
 	private static String USERNAME;
 	private static String PASSWORD;
 	private static int TIMEOUT_SEC;
+	private static List<String> nodeList; // list of all nodes related to the
+											// user.
 
 	@Test(description = "Logging in. - Too long")
 	public void loginBad1() {
@@ -79,8 +82,8 @@ public class MainTest {
 		mobileElement.submit();
 
 		// wait to get confirmation that it is loaded
-		(new WebDriverWait(driver, TIMEOUT_SEC))
-				.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("aside#menu div#navigation div.profile-picture div.stats-label div.dropdown a.dropdown-toggle small.text-muted span.text-success")));
+		(new WebDriverWait(driver, TIMEOUT_SEC)).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(
+				"aside#menu div#navigation div.profile-picture div.stats-label div.dropdown a.dropdown-toggle small.text-muted span.text-success")));
 	}
 
 	@Test(description = "Verifies that after a bad login, user can enter")
@@ -154,7 +157,7 @@ public class MainTest {
 		String query = "select distinct nodes.mass_transit_info from nodes inner join connections on nodes.id = connections.node_id where connections.identity = '"
 				+ USERNAME + "' order by connections.id desc;";
 		SQLHandler sh = null;
-		List<String> nodeList = null;
+		nodeList = null;
 		try {
 			sh = new SQLHandler();
 			nodeList = sh.queryExecute(query, 1);
@@ -187,7 +190,25 @@ public class MainTest {
 		Assert.assertEquals(URL + "/node/" + nodeId, currentUrl);
 	}
 
-	@BeforeTest(alwaysRun = true)
+	@Test(description="Admin node arrow exists")
+	public void nodeAdminDropdownArrow() {
+		String query = "select id from nodes where public_phone_number =" + USERNAME;
+		SQLHandler sh = null;
+		List<String> nodeListId = null;
+		try {
+			sh = new SQLHandler();
+			nodeListId = sh.queryExecute(query, 1);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		Assert.assertFalse(nodeListId.retainAll(nodeList));
+		for (String e : nodeListId) {
+			System.out.println("ul.nav#side-menu > li > a[href='/node/" + e + "'] > span.fa.arrow");
+			mobileElement = driver.findElement(By.cssSelector("ul.nav#side-menu > li > a[href='/node/" + e + "'] > span.fa.arrow"));
+		}
+	}
+
+	@BeforeTest(alwaysRun = false)
 	public void beforeTest(ITestContext context) {
 		// Reference to Chrome
 		driver = new ChromeDriver();
