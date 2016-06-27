@@ -2,11 +2,11 @@
 <suite name="Suite" parallel="false">
 	<parameter name="base_url" value="http://authpuppy.localhost.com" />
 	<parameter name="username" value="9538155667" />
-	<parameter name="password" value="aura1234"/>
+	<parameter name="password" value="aura1234" />
 	<parameter name="id_username_input" value="pocha_pocha_mobile" />
 	<parameter name="id_password_input" value="apAuthLocalUser_password" />
 	<parameter name="timeout_sec" value="5" />
-	
+
 	<test name="Test">
 		<classes>
 			<class name="com.griggi.app.MainTest" />
@@ -22,6 +22,7 @@
 				<include name="verifyLatestNodeURL" />
 				<include name="listOfNodes" />
 				<include name="nodeAdminDropdownArrow" />
+				<include name="routerSpeed" />
 			</methods>
 		</classes>
 	</test> <!-- Test -->
