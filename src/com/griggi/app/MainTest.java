@@ -1,13 +1,13 @@
 package com.griggi.app;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeTest;
@@ -24,6 +24,7 @@ public class MainTest {
 	private static int TIMEOUT_SEC;
 	private static List<String> nodeList; // list of all nodes related to the
 											// user.
+	private static List<String> nodeListId;
 
 	@Test(description = "Logging in. - Too long")
 	public void loginBad1() {
@@ -190,7 +191,7 @@ public class MainTest {
 		Assert.assertEquals(URL + "/node/" + nodeId, currentUrl);
 	}
 
-	@Test(description="Admin node arrow exists")
+	@Test(description = "Admin node arrow exists")
 	public void nodeAdminDropdownArrow() {
 		String query = "select id from nodes where public_phone_number =" + USERNAME;
 		SQLHandler sh = null;
@@ -201,10 +202,52 @@ public class MainTest {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+		// admin must have connected with the node they are admin of
 		Assert.assertFalse(nodeListId.retainAll(nodeList));
 		for (String e : nodeListId) {
 			System.out.println("ul.nav#side-menu > li > a[href='/node/" + e + "'] > span.fa.arrow");
-			mobileElement = driver.findElement(By.cssSelector("ul.nav#side-menu > li > a[href='/node/" + e + "'] > span.fa.arrow"));
+			mobileElement = driver
+					.findElement(By.cssSelector("ul.nav#side-menu > li > a[href='/node/" + e + "'] > span.fa.arrow"));
+		}
+	}
+
+	@Test(description = "Router Speed")
+	public void routerSpeed() {
+
+		String f = "select distinct nodes.id from nodes inner join connections on nodes.id = connections.node_id where connections.identity = '"
+				+ USERNAME + "' order by connections.id desc;";
+		try {
+			SQLHandler df = new SQLHandler();
+			nodeListId = df.queryExecute(f, 1);
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		for (String e : nodeListId) {
+			String query = "select civic_number from nodes where id = '" + e + "'";
+			try {
+				SQLHandler sh = new SQLHandler();
+				String ans = sh.queryExecute(query, 1).get(0);
+				driver.get(URL + "/node/" + e);
+				// need to wait until the content of the required widget/box in
+				// dashboard is loaded
+				(new WebDriverWait(driver, TIMEOUT_SEC)).until(new ExpectedCondition<Boolean>() {
+					public Boolean apply(WebDriver d) {
+						return d.findElements(By.cssSelector("h1.text-success")).get(0).getText().length() > 0;
+					}
+				});
+				// System.out.println("Expected: " + ans + " Mbps" + "\nActual:
+				// " +
+				// driver.findElements(By.cssSelector("h1.text-success")).get(0).getText());
+				Assert.assertEquals(ans + " Mbps",
+						driver.findElements(By.cssSelector("h1.text-success")).get(0).getText());
+			} catch (ClassNotFoundException ex) {
+				ex.printStackTrace();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+
 		}
 	}
 
@@ -225,5 +268,14 @@ public class MainTest {
 	@AfterTest
 	public void afterTest() {
 		driver.close();
+	}
+
+	// misc
+	public void sleepFor(int sec) {
+		try {
+			Thread.sleep(sec * 1000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
