@@ -23,6 +23,8 @@
 				<include name="listOfNodes" />
 				<include name="nodeAdminDropdownArrow" />
 				<include name="routerSpeed" />
+				<include name="availableQuota" />
+				<include name="dataAllocation" />
 			</methods>
 		</classes>
 	</test> <!-- Test -->

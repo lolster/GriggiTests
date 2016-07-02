@@ -220,7 +220,6 @@ public class MainTest {
 			SQLHandler df = new SQLHandler();
 			nodeListId = df.queryExecute(f, 1);
 		} catch (ClassNotFoundException | SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -249,6 +248,111 @@ public class MainTest {
 			}
 
 		}
+	}
+
+	@Test(description = "Checks the available quota of the user with the DB")
+	public void availableQuota() {
+
+		String f = "select distinct nodes.id from nodes inner join connections on nodes.id = connections.node_id where connections.identity = '"
+				+ USERNAME + "' order by connections.id desc;";
+		try {
+			SQLHandler df = new SQLHandler();
+			nodeListId = df.queryExecute(f, 1);
+		} catch (ClassNotFoundException | SQLException e1) {
+			e1.printStackTrace();
+		}
+
+		for (String e : nodeListId) {
+			String query = "select civic_number from nodes where id = '" + e + "'";
+			try {
+				SQLHandler sh = new SQLHandler();
+				String ans = sh.queryExecute(query, 1).get(0);
+				driver.get(URL + "/node/" + e);
+				// need to wait until the content of the required widget/box in
+				// dashboard is loaded
+				(new WebDriverWait(driver, TIMEOUT_SEC)).until(new ExpectedCondition<Boolean>() {
+					public Boolean apply(WebDriver d) {
+						return d.findElements(By.cssSelector("h1.text-success")).get(0).getText().length() > 0;
+					}
+				});
+				Assert.assertEquals(ans + " Mbps",
+						driver.findElements(By.cssSelector("h1.text-success")).get(0).getText());
+			} catch (ClassNotFoundException ex) {
+				ex.printStackTrace();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+
+		}
+	}
+
+	@Test(description = "Tests the data allocation for a user.")
+	public void dataAllocation() {
+		/*
+		 * Tests the data allocation for a single user on his admin node to
+		 * himself. Reset the data allocated to 0GB Set to 100GB Reset to 0GB
+		 * QUICK AND DIRTY, TO BE CLEANED UP
+		 */
+
+		// TODO Make more modular
+		// Take a random user from configure page of an admin node
+		// Then set the below 'int id' variable to the id of the edit
+		// Page of the user's allocation page on that node
+		// Need to find a node which user is admin of and select a random user
+		// automatically
+		int id = 1734; // id for 9535354545 on nodeid 2 in userdatas
+		String initAmt = "0";
+		String finalAmt = "100";
+		String q = "select freedata from userdatas where id = " + id;
+		SQLHandler sh;
+		String dataAllocated = "NA";
+
+		// add 0gb to user on his admin node
+		driver.get("http://authpuppy.localhost.com/userdata/edit?id=" + id);
+		mobileElement = driver.findElement(By.cssSelector("input#userdata_freedata"));
+		mobileElement.clear();
+		mobileElement.sendKeys(initAmt);
+		mobileElement.submit();
+
+		try {
+			sh = new SQLHandler();
+			dataAllocated = sh.queryExecute(q, 1).get(0).toString();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		Assert.assertEquals(initAmt, dataAllocated);
+
+		// add 100gb to user on his admin node
+		driver.get("http://authpuppy.localhost.com/userdata/edit?id=" + id);
+		mobileElement = driver.findElement(By.cssSelector("input#userdata_freedata"));
+		mobileElement.clear();
+		mobileElement.sendKeys(finalAmt);
+		mobileElement.submit();
+
+		try {
+			sh = new SQLHandler();
+			dataAllocated = sh.queryExecute(q, 1).get(0).toString();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		Assert.assertEquals(finalAmt, dataAllocated);
+
+		// add 100gb to user on his admin node
+		driver.get("http://authpuppy.localhost.com/userdata/edit?id=" + id);
+		mobileElement = driver.findElement(By.cssSelector("input#userdata_freedata"));
+		mobileElement.clear();
+		mobileElement.sendKeys(initAmt);
+		mobileElement.submit();
+
+		// one final check, since we can do it, why not
+		try {
+			sh = new SQLHandler();
+			dataAllocated = sh.queryExecute(q, 1).get(0).toString();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		Assert.assertEquals(initAmt, dataAllocated);
+
 	}
 
 	@BeforeTest(alwaysRun = false)

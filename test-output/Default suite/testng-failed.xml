@@ -7,9 +7,19 @@
         <methods>
           <include name="beforeTest"/>
           <include name="loginBad1"/>
+          <include name="nodeAdminDropdownArrow"/>
+          <include name="dataAllocation"/>
           <include name="loginBad3"/>
           <include name="loginBad2"/>
-          <include name="loginGood"/>
+          <include name="loginGood2"/>
+          <include name="dashboardUICheck1"/>
+          <include name="loginGood1"/>
+          <include name="dashboardUICheck3"/>
+          <include name="dashboardUICheck2"/>
+          <include name="verifyLatestNodeURL"/>
+          <include name="availableQuota"/>
+          <include name="routerSpeed"/>
+          <include name="listOfNodes"/>
         </methods>
       </class> <!-- com.griggi.app.MainTest -->
     </classes>
