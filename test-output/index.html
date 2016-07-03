@@ -90,7 +90,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">12 methods, 2 failed,   10 passed</span>
+                    <span class="method-stats">14 methods, 2 failed,   12 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title failed">Failed methods</span>
@@ -120,6 +120,11 @@
                     <div class="method-list-content passed suite-Suite">
                       <span>
                         <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.griggi.app.MainTest" hash-for-method="availableQuota">availableQuota</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.griggi.app.MainTest" hash-for-method="dashboardUICheck1">dashboardUICheck1</a> <!-- method navigator-link -->
                       </span>
                       <br/>
@@ -131,6 +136,11 @@
                       <span>
                         <img width="3%" src="passed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.griggi.app.MainTest" hash-for-method="dashboardUICheck3">dashboardUICheck3</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.griggi.app.MainTest" hash-for-method="dataAllocation">dataAllocation</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
@@ -228,6 +238,15 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
+                  <a name="availableQuota">
+                  </a> <!-- availableQuota -->
+                  <span class="method-name">availableQuota</span>
+                  <em>
+(Checks the available quota of the user with the DB)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
                   <a name="dashboardUICheck1">
                   </a> <!-- dashboardUICheck1 -->
                   <span class="method-name">dashboardUICheck1</span>
@@ -251,6 +270,15 @@
                   <span class="method-name">dashboardUICheck3</span>
                   <em>
 (Check Dashboard UI - 3 (Header))                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="dataAllocation">
+                  </a> <!-- dataAllocation -->
+                  <span class="method-name">dataAllocation</span>
+                  <em>
+(Tests the data allocation for a user.)                  </em>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
@@ -350,6 +378,8 @@
           &lt;include name=&quot;listOfNodes&quot;/&gt;
           &lt;include name=&quot;nodeAdminDropdownArrow&quot;/&gt;
           &lt;include name=&quot;routerSpeed&quot;/&gt;
+          &lt;include name=&quot;availableQuota&quot;/&gt;
+          &lt;include name=&quot;dataAllocation&quot;/&gt;
         &lt;/methods&gt;
       &lt;/class&gt; &lt;!-- com.griggi.app.MainTest --&gt;
     &lt;/classes&gt;
@@ -391,60 +421,68 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(12);
+data.addRows(14);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'routerSpeed')
+data.setCell(0, 1, 'dataAllocation')
 data.setCell(0, 2, 'com.griggi.app.MainTest')
-data.setCell(0, 3, 3959);
+data.setCell(0, 3, 11265);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'loginGood2')
+data.setCell(1, 1, 'routerSpeed')
 data.setCell(1, 2, 'com.griggi.app.MainTest')
-data.setCell(1, 3, 2237);
+data.setCell(1, 3, 4564);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'loginGood1')
+data.setCell(2, 1, 'availableQuota')
 data.setCell(2, 2, 'com.griggi.app.MainTest')
-data.setCell(2, 3, 2160);
+data.setCell(2, 3, 4547);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'loginBad1')
+data.setCell(3, 1, 'loginGood2')
 data.setCell(3, 2, 'com.griggi.app.MainTest')
-data.setCell(3, 3, 1623);
+data.setCell(3, 3, 2382);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'loginBad2')
+data.setCell(4, 1, 'loginGood1')
 data.setCell(4, 2, 'com.griggi.app.MainTest')
-data.setCell(4, 3, 1280);
+data.setCell(4, 3, 2236);
 data.setCell(5, 0, 5)
-data.setCell(5, 1, 'loginBad3')
+data.setCell(5, 1, 'loginBad1')
 data.setCell(5, 2, 'com.griggi.app.MainTest')
-data.setCell(5, 3, 1135);
+data.setCell(5, 3, 1495);
 data.setCell(6, 0, 6)
-data.setCell(6, 1, 'verifyLatestNodeURL')
+data.setCell(6, 1, 'loginBad2')
 data.setCell(6, 2, 'com.griggi.app.MainTest')
-data.setCell(6, 3, 306);
+data.setCell(6, 3, 1023);
 data.setCell(7, 0, 7)
-data.setCell(7, 1, 'listOfNodes')
+data.setCell(7, 1, 'loginBad3')
 data.setCell(7, 2, 'com.griggi.app.MainTest')
-data.setCell(7, 3, 283);
+data.setCell(7, 3, 987);
 data.setCell(8, 0, 8)
-data.setCell(8, 1, 'dashboardUICheck1')
+data.setCell(8, 1, 'verifyLatestNodeURL')
 data.setCell(8, 2, 'com.griggi.app.MainTest')
-data.setCell(8, 3, 180);
+data.setCell(8, 3, 338);
 data.setCell(9, 0, 9)
-data.setCell(9, 1, 'dashboardUICheck2')
+data.setCell(9, 1, 'listOfNodes')
 data.setCell(9, 2, 'com.griggi.app.MainTest')
-data.setCell(9, 3, 61);
+data.setCell(9, 3, 292);
 data.setCell(10, 0, 10)
-data.setCell(10, 1, 'dashboardUICheck3')
+data.setCell(10, 1, 'dashboardUICheck1')
 data.setCell(10, 2, 'com.griggi.app.MainTest')
-data.setCell(10, 3, 38);
+data.setCell(10, 3, 161);
 data.setCell(11, 0, 11)
-data.setCell(11, 1, 'nodeAdminDropdownArrow')
+data.setCell(11, 1, 'dashboardUICheck2')
 data.setCell(11, 2, 'com.griggi.app.MainTest')
-data.setCell(11, 3, 15);
+data.setCell(11, 3, 71);
+data.setCell(12, 0, 12)
+data.setCell(12, 1, 'dashboardUICheck3')
+data.setCell(12, 2, 'com.griggi.app.MainTest')
+data.setCell(12, 3, 40);
+data.setCell(13, 0, 13)
+data.setCell(13, 1, 'nodeAdminDropdownArrow')
+data.setCell(13, 2, 'com.griggi.app.MainTest')
+data.setCell(13, 3, 17);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 13 seconds</span>
+              <span class="suite-total-time">Total running time: 29 seconds</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -472,64 +510,72 @@ return data;
             <div class="chronological-class">
               <div class="chronological-class-name">com.griggi.app.MainTest</div> <!-- chronological-class-name -->
               <div class="configuration-test before">
-                <span class="method-name">beforeTest(org.testng.TestRunner@70076b33)</span>
+                <span class="method-name">beforeTest(org.testng.TestRunner@25f39c4)</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-test before -->
               <div class="test-method">
                 <span class="method-name">loginBad1</span>
-                <span class="method-start">2271 ms</span>
+                <span class="method-start">2109 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">loginBad2</span>
-                <span class="method-start">3915 ms</span>
+                <span class="method-start">3613 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">loginBad3</span>
-                <span class="method-start">5214 ms</span>
+                <span class="method-start">4649 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
                 <span class="method-name">loginGood2</span>
-                <span class="method-start">6364 ms</span>
+                <span class="method-start">5643 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">loginGood1</span>
-                <span class="method-start">8610 ms</span>
+                <span class="method-start">8073 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">dashboardUICheck1</span>
-                <span class="method-start">10774 ms</span>
+                <span class="method-start">10315 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">dashboardUICheck2</span>
-                <span class="method-start">10961 ms</span>
+                <span class="method-start">10488 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">dashboardUICheck3</span>
-                <span class="method-start">11036 ms</span>
+                <span class="method-start">10567 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">verifyLatestNodeURL</span>
-                <span class="method-start">11096 ms</span>
+                <span class="method-start">10625 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">listOfNodes</span>
-                <span class="method-start">11419 ms</span>
+                <span class="method-start">10969 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
                 <span class="method-name">nodeAdminDropdownArrow</span>
-                <span class="method-start">11706 ms</span>
+                <span class="method-start">11267 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">routerSpeed</span>
-                <span class="method-start">11725 ms</span>
+                <span class="method-start">11290 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">availableQuota</span>
+                <span class="method-start">15863 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">dataAllocation</span>
+                <span class="method-start">20413 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-test after">
                 <span class="method-name">afterTest</span>
-                <span class="method-start">15693 ms</span>
+                <span class="method-start">31690 ms</span>
               </div> <!-- configuration-test after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
