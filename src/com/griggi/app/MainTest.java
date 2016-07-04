@@ -300,23 +300,27 @@ public class MainTest {
 		String q = "select freedata from userdatas where id = " + id;
 		SQLHandler sh;
 		String dataAllocated = "NA";
-		
-		//selecting the user to allocate and deallocate to.
+
+		// selecting the user to allocate and deallocate to.
 		String adminCheckQuery = "select id from nodes where public_phone_number = " + USERNAME + " limit 1;";
 		String userSelectQuery = "select id from userdatas where nodeid = ";
 		try {
 			sh = new SQLHandler();
-			List<String> temp = sh.queryExecute(adminCheckQuery, 0);//.get(0).toString();
+			List<String> temp = sh.queryExecute(adminCheckQuery, 0);
 			if (temp.size() > 0) {
-				for(String w : temp) {
+				for (String w : temp) {
 					List<String> tempUsers = sh.queryExecute(userSelectQuery + w, 0);
-					if(tempUsers.size() > 0) {
+					if (tempUsers.size() > 0) {
 						id = Integer.parseInt(tempUsers.get(0));
 						break;
 					}
 				}
+				// if we get here, then the user's admin nodes do not have any
+				// person connected to them.
+				System.out.println("[dataAllocation] " + USERNAME + " has no one connected to admin nodes.");
+				return;
 			}
-			//exit if user has no admin nodes
+			// exit if user has no admin nodes
 			else {
 				System.out.println("[dataAllocation] " + USERNAME + " has no admin nodes.");
 				return;
