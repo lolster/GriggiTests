@@ -294,18 +294,36 @@ public class MainTest {
 		 * QUICK AND DIRTY, TO BE CLEANED UP
 		 */
 
-		// TODO Make more modular
-		// Take a random user from configure page of an admin node
-		// Then set the below 'int id' variable to the id of the edit
-		// Page of the user's allocation page on that node
-		// Need to find a node which user is admin of and select a random user
-		// automatically
 		int id = 1734; // id for 9535354545 on nodeid 2 in userdatas
 		String initAmt = "0";
 		String finalAmt = "100";
 		String q = "select freedata from userdatas where id = " + id;
 		SQLHandler sh;
 		String dataAllocated = "NA";
+		
+		//selecting the user to allocate and deallocate to.
+		String adminCheckQuery = "select id from nodes where public_phone_number = " + USERNAME + " limit 1;";
+		String userSelectQuery = "select id from userdatas where nodeid = ";
+		try {
+			sh = new SQLHandler();
+			List<String> temp = sh.queryExecute(adminCheckQuery, 0);//.get(0).toString();
+			if (temp.size() > 0) {
+				for(String w : temp) {
+					List<String> tempUsers = sh.queryExecute(userSelectQuery + w, 0);
+					if(tempUsers.size() > 0) {
+						id = Integer.parseInt(tempUsers.get(0));
+						break;
+					}
+				}
+			}
+			//exit if user has no admin nodes
+			else {
+				System.out.println("[dataAllocation] " + USERNAME + " has no admin nodes.");
+				return;
+			}
+		} catch (ClassNotFoundException | SQLException e1) {
+			e1.printStackTrace();
+		}
 
 		// add 0gb to user on his admin node
 		driver.get("http://authpuppy.localhost.com/userdata/edit?id=" + id);
