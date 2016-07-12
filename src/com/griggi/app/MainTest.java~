@@ -3,7 +3,6 @@ package com.griggi.app;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.commons.exec.util.StringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -377,83 +376,7 @@ public class MainTest {
 		Assert.assertEquals(initAmt, dataAllocated);
 
 	}
-	
-	@Test(description = "Tests the UI for the data topup page - I")
-	public void dataTopUpUI1(){
-		driver.get("http://authpuppy.localhost.com/payment/new");
-		// checking ui elements
-		(new WebDriverWait(driver, TIMEOUT_SEC))
-				.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input#ap_user_payment_buy_data")));
-	}
-	
-	@Test(description = "Tests the UI for the data topup page - II")
-	public void dataTopUpUI2(){
-		// checking ui elements
-		(new WebDriverWait(driver, TIMEOUT_SEC))
-				.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input#pay_submit")));
-	}
 
-	@Test(description = "Tests the UI for the data topup page - III")
-	public void dataTopUpUI3(){
-		// checking ui elements
-		(new WebDriverWait(driver, TIMEOUT_SEC))
-				.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".text-muted")));
-	}
-	
-	@Test(description = "Tests the UI for the data topup page - Input (Invalid)")
-	public void dataTopUpInput(){
-		driver.get("http://authpuppy.localhost.com/payment/new");
-		mobileElement = driver.findElement(By.id("ap_user_payment_buy_data"));
-		mobileElement.sendKeys("asdf");
-
-		WebElement openModal  = driver.findElement(By.id("pay_submit"));
-		String[] rupee = openModal.getText().split(" ");
-		String regex = "\\d+";
-		Assert.assertTrue(rupee[2].matches(regex));
-		//mobileElement.submit();
-		
-		
-		/*
-		//merchant DIV
-		(new WebDriverWait(driver, TIMEOUT_SEC))
-			.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div#merchant")));
-		
-		//merchant name
-		(new WebDriverWait(driver, TIMEOUT_SEC))
-			.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div#merchant-name")));
-		
-		//Amount purchased
-		(new WebDriverWait(driver, TIMEOUT_SEC))
-			.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div#amount")));
-				
-		//merchant caption
-		(new WebDriverWait(driver, TIMEOUT_SEC))
-			.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div#merchant-desc")));
-		
-		//checking contact
-		(new WebDriverWait(driver, TIMEOUT_SEC))
-			.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input#contact")));
-		
-		//checking email
-		(new WebDriverWait(driver, TIMEOUT_SEC))
-			.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input#email")));
-		
-		//checking payment options
-		(new WebDriverWait(driver, TIMEOUT_SEC))
-			.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div#payment-options")));
-
-		*/
-	}
-	
-	@Test(description = "Tests the amount calculation for the data topup page")
-	public void dataTopUpAmount(){
-		driver.get("http://authpuppy.localhost.com/payment/new");
-		mobileElement = driver.findElement(By.id("ap_user_payment_buy_data"));
-		mobileElement.sendKeys("123");
-		
-		
-	}
-	
 	@BeforeTest(alwaysRun = false)
 	public void beforeTest(ITestContext context) {
 		// Reference to Chrome

@@ -24,11 +24,7 @@
 				<include name="nodeAdminDropdownArrow" />
 				<include name="routerSpeed" />
 				<include name="availableQuota" />
-				<include name="dataAllocation" />	
-				<include name="dataTopUpUI1" />
-				<include name="dataTopUpUI2" />
-				<include name="dataTopUpUI3" />
-				<include name="dataTopUpInput" />
+				<include name="dataAllocation" />
 			</methods>
 		</classes>
 	</test> <!-- Test -->
