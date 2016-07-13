@@ -234,12 +234,11 @@ public class MainTest {
 				// dashboard is loaded
 				(new WebDriverWait(driver, TIMEOUT_SEC)).until(new ExpectedCondition<Boolean>() {
 					public Boolean apply(WebDriver d) {
-						return d.findElements(By.cssSelector("h1.text-success")).get(0).getText().length() > 0;
+						return d.findElements(By.cssSelector("h1.text-success")).size() > 0 && d.findElements(By.cssSelector("h1.text-success")).get(0).getText().length() > 0;
 					}
 				});
-				// System.out.println("Expected: " + ans + " Mbps" + "\nActual:
-				// " +
-				// driver.findElements(By.cssSelector("h1.text-success")).get(0).getText());
+				System.out.println("Expected: " + ans + " Mbps" + "\nActual:" +
+				driver.findElements(By.cssSelector("h1.text-success")).get(0).getText());
 				Assert.assertEquals(ans + " Mbps",
 						driver.findElements(By.cssSelector("h1.text-success")).get(0).getText());
 			} catch (ClassNotFoundException ex) {
@@ -307,10 +306,10 @@ public class MainTest {
 		String userSelectQuery = "select id from userdatas where nodeid = ";
 		try {
 			sh = new SQLHandler();
-			List<String> temp = sh.queryExecute(adminCheckQuery, 0);
+			List<String> temp = sh.queryExecute(adminCheckQuery, 1); //
 			if (temp.size() > 0) {
 				for (String w : temp) {
-					List<String> tempUsers = sh.queryExecute(userSelectQuery + w, 0);
+					List<String> tempUsers = sh.queryExecute(userSelectQuery + w, 1); //
 					if (tempUsers.size() > 0) {
 						id = Integer.parseInt(tempUsers.get(0));
 						break;
