@@ -25,6 +25,10 @@
 				<include name="routerSpeed" />
 				<include name="availableQuota" />
 				<include name="dataAllocation" />
+				<include name="dataTopUpUI1" />
+				<include name="dataTopUpUI2" />
+				<include name="dataTopUpUI3" />
+				<include name="dataTopUpInput" />
 			</methods>
 		</classes>
 	</test> <!-- Test -->
