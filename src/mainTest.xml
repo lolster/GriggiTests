@@ -6,6 +6,7 @@
 	<parameter name="id_username_input" value="pocha_pocha_mobile" />
 	<parameter name="id_password_input" value="apAuthLocalUser_password" />
 	<parameter name="timeout_sec" value="5" />
+	<parameter name="delta-comparisons" value="0.01" />
 
 	<test name="Test">
 		<classes>
@@ -23,12 +24,14 @@
 				<include name="listOfNodes" />
 				<include name="nodeAdminDropdownArrow" />
 				<include name="routerSpeed" />
-				<!--<include name="availableQuota" />
-				<include name="dataAllocation" />-->
+				<!--<include name="dataAllocation" />-->
+				<!-- <include name="availableQuota" />-->
+				<include name="routerFUPLimit" />
+				<!--
 				<include name="dataTopUpUI1" />
 				<include name="dataTopUpUI2" />
 				<include name="dataTopUpUI3" />
-				<include name="dataTopUpInput" />
+				<include name="dataTopUpInput" />-->
 			</methods>
 		</classes>
 	</test> <!-- Test -->

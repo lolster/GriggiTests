@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Suite]">
+  <parameter name="delta-comparisons" value="0.01"/>
   <parameter name="username" value="9538155667"/>
   <parameter name="id_username_input" value="pocha_pocha_mobile"/>
   <parameter name="timeout_sec" value="5"/>
@@ -12,7 +13,7 @@
       <class name="com.griggi.app.MainTest">
         <methods>
           <include name="beforeTest"/>
-          <include name="dataTopUpInput"/>
+          <include name="routerFUPLimit"/>
           <include name="nodeAdminDropdownArrow"/>
           <include name="afterTest"/>
           <include name="loginGood2"/>

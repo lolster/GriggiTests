@@ -1,0 +1,17 @@
+SELECT SUM(incoming)+SUM(outgoing) AS total_usage 
+FROM 
+	(SELECT node_id, incoming, outgoing, created_at, updated_at 
+	 FROM `connections` 
+	 WHERE node_id = 2 
+	 AND date(updated_at) BETWEEN '2016-07-03' AND '2016-08-02') 
+AS t1; --the query to get the total usage of data in this month (at the time of writing, it was july)
+
+SELECT SUM(incoming)+SUM(outgoing) AS total_usage 
+FROM 
+	(SELECT node_id, incoming, outgoing, created_at, updated_at 
+	 FROM `connections` 
+	 WHERE node_id = 2 
+	 AND date(updated_at) BETWEEN '2016-07-03' AND '2016-08-02'
+         AND identity = '7406793110') 
+AS t1;
+query to calculate data used by a user at a node in the billing cycle

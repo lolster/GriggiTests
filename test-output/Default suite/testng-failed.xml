@@ -6,11 +6,16 @@
       <class name="com.griggi.app.MainTest">
         <methods>
           <include name="beforeTest"/>
+          <include name="dataTopUpInput"/>
+          <include name="dataTopUpAmount"/>
           <include name="loginBad1"/>
           <include name="nodeAdminDropdownArrow"/>
-          <include name="dataAllocation"/>
           <include name="loginBad3"/>
+          <include name="dataAllocation"/>
+          <include name="dataTopUpUI2"/>
           <include name="loginBad2"/>
+          <include name="dataTopUpUI1"/>
+          <include name="dataTopUpUI3"/>
           <include name="loginGood2"/>
           <include name="dashboardUICheck1"/>
           <include name="loginGood1"/>
