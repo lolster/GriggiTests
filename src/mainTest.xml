@@ -25,8 +25,8 @@
 				<include name="nodeAdminDropdownArrow" />
 				<include name="routerSpeed" />
 				<!--<include name="dataAllocation" />-->
-				<!-- <include name="availableQuota" />-->
-				<include name="routerFUPLimit" />
+				<include name="availableQuota" />
+				<!--<include name="routerFUPLimit" />-->
 				<!--
 				<include name="dataTopUpUI1" />
 				<include name="dataTopUpUI2" />

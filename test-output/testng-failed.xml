@@ -13,7 +13,6 @@
       <class name="com.griggi.app.MainTest">
         <methods>
           <include name="beforeTest"/>
-          <include name="routerFUPLimit"/>
           <include name="nodeAdminDropdownArrow"/>
           <include name="afterTest"/>
           <include name="loginGood2"/>

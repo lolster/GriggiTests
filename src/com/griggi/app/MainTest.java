@@ -18,7 +18,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.AfterTest;
 
 public class MainTest {
-	
+
 	private static WebDriver driver;
 	private static WebElement mobileElement;
 	private static String URL;
@@ -31,7 +31,6 @@ public class MainTest {
 	private static List<String> nodeListId;
 	// private static List<String> nodeListAdmin; //list of all nodes which
 	// USERNAME is admin of
-	
 
 	@Test(description = "Logging in. - Too long")
 	public void loginBad1() {
@@ -264,13 +263,12 @@ public class MainTest {
 
 	@Test(description = "Checks the available quota of the user with the DB")
 	public void availableQuota() {
-		// String adminNodesQuery = "select ";
-		// for all nodes that USERNAME has connected to
 
 		// queries
 		String karmaDataQuery = "select karma_data from ap_user where username=" + USERNAME;
 		String freeDataQuery = "select freedata from userdatas where userid=" + USERNAME + " and nodeid = ";
 		String usedDataQuery = "select useddata from userdatas where userid=" + USERNAME + " and nodeid = ";
+		String maxUserDataQuery = "select max_user_data from nodes where id = ";
 
 		for (String nodeID : nodeListId) {
 			System.out.println("nodeID: " + nodeID);
@@ -287,7 +285,7 @@ public class MainTest {
 				e.printStackTrace();
 			}
 
-			//Assert.assertNotEquals(null, tempList);
+			// Assert.assertNotEquals(null, tempList);
 			Assert.assertEquals(1, tempList.size()); // only one user should be
 														// selected
 
@@ -303,7 +301,7 @@ public class MainTest {
 				e.printStackTrace();
 			}
 
-			//Assert.assertNotEquals(null, tempList);
+			// Assert.assertNotEquals(null, tempList);
 			Assert.assertEquals(1, tempList.size());
 
 			if (!(tempList.get(0) == null)) {
@@ -318,7 +316,7 @@ public class MainTest {
 				e.printStackTrace();
 			}
 
-			//Assert.assertNotEquals(null, tempList);
+			// Assert.assertNotEquals(null, tempList);
 			Assert.assertEquals(1, tempList.size());
 
 			if (!(tempList.get(0) == null)) {
@@ -327,15 +325,7 @@ public class MainTest {
 
 			// rounding to 2 decimal places
 			double availableQuota = Math.round((karmaData + freeData - (usedData / 1024.0)) * 100.0) / 100.0;
-			
-			/*System.out.println("\n---------------------------------");
-			//System.out.println(karmaData + freeData - (usedData / 1024.0));
-			System.out.println("avaiQ: " + availableQuota);
-			System.out.println("karmaData: " + karmaData);
-			System.out.println("freeData: " + freeData);
-			System.out.println("usedData: " + usedData);
-			*/
-			
+
 			driver.get(URL + "/node/" + nodeID);
 			// need to wait until the content of the required widget/box in
 			// dashboard is loaded
@@ -345,92 +335,113 @@ public class MainTest {
 				}
 			});
 			mobileElement = driver.findElement(By.cssSelector("h1#avail-quota > span"));
-			
-			//if available quota drops below 1gb, is it shown in mb
-			//in dashboard
-			if(availableQuota < 1) {
-				availableQuota = karmaData*1024 + freeData*1024 - usedData;
-				//System.out.println(availableQuota + " MB");
-				if(availableQuota <= 0) {
+
+			// if available quota drops below 1gb, is it shown in mb
+			// in dashboard
+			if (availableQuota < 1) {
+				availableQuota = karmaData * 1024 + freeData * 1024 - usedData;
+				// System.out.println(availableQuota + " MB");
+				if (availableQuota <= 0) {
 					Assert.assertEquals("0", mobileElement.getText().trim());
-				}
-				else {
+				} else {
 					Assert.assertEquals(availableQuota + " MB", mobileElement.getText().trim());
 				}
-			}
-			else {
-				//we can directly compare
+			} else {
+				// we can directly compare
 				Assert.assertEquals(availableQuota, Double.parseDouble(mobileElement.getText().split(" ")[0]), DELTA);
 			}
-			
-			/*System.out.println("On dashboard: " + mobileElement.getText());
-			System.out.println("\n---------------------------------");*/
-			// Assert.assertEquals(availableQuota + " GB",
-			// mobileElement.getText().trim());
+
+			if (availableQuota > 0) {
+				List<WebElement> list = driver.findElements(By.cssSelector("h1#avail-quota ~ small span.text-success"));
+				Assert.assertEquals(Math.round((usedData / 1024) * 100.0) / 100.0,
+						Double.parseDouble(list.get(0).getText().trim().split(" ")[0]), DELTA);
+				String maxUserData = "";
+				try {
+					SQLHandler sh = new SQLHandler();
+					maxUserData = sh.queryExecute(maxUserDataQuery + nodeID, 1).get(0);
+				} catch (ClassNotFoundException | SQLException e) {
+					e.printStackTrace();
+				}
+				Assert.assertEquals(maxUserData + " GB", list.get(1).getText().trim());
+			}
+			else {
+				List<WebElement> list = driver.findElements(By.cssSelector("h1#avail-quota ~ small span.text-success"));
+				Assert.assertEquals(Math.round((usedData / 1024) * 100.0) / 100.0,
+						Double.parseDouble(list.get(0).getText().trim().split(" ")[0]), DELTA);
+			}
 		}
 	}
+
 	
-	@Test(description="Tests the router fup limit shown to user in dashboard")
+	
+	@Test(description = "Tests the router fup limit shown to user in dashboard")
 	public void routerFUPLimit() {
 		Calendar c = Calendar.getInstance();
-		//int day = c.get(Calendar.DAY_OF_MONTH);
-		int month = c.get(Calendar.MONTH) + 1; //months are 0 based
+		// int day = c.get(Calendar.DAY_OF_MONTH);
+		int month = c.get(Calendar.MONTH) + 1; // months are 0 based
 		int year = c.get(Calendar.YEAR);
-		int nextMonth = month+1;
+		int nextMonth = month + 1;
 		int nextYear = year;
-		if(nextMonth > 12) {
+		if (nextMonth > 12) {
 			nextMonth = 1;
 			nextYear++;
 		}
-		int[] daysArray = {31,30,31,30,31,30,31,31,30,31,30};
-		//query to fetch billing day
+		int[] daysArray = { 31, 30, 31, 30, 31, 30, 31, 31, 30, 31, 30 };
+		// query to fetch billing day
 		String getBillingDayQuery = "select billing_start_date from nodes where id = ";
 
-		for(String nodeID : nodeListId) {
+		for (String nodeID : nodeListId) {
 			int billingDay = 1;
 			int nextBillingDay = 0;
 			try {
-				SQLHandler sh= new SQLHandler();
+				SQLHandler sh = new SQLHandler();
 				billingDay = Integer.parseInt(sh.queryExecute(getBillingDayQuery + nodeID, 1).get(0));
 			} catch (ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
 			}
 			nextBillingDay = billingDay - 1;
-			if(nextBillingDay == 0) {
-				nextBillingDay = daysArray[month]; //the end of the month
+			if (nextBillingDay == 0) {
+				nextBillingDay = daysArray[month]; // the end of the month
 			}
-			
-			String getTotalDataUsedQuery = "SELECT SUM(incoming)+SUM(outgoing) AS total_usage FROM (SELECT incoming, outgoing FROM connections WHERE node_id = " + nodeID + " AND date(updated_at) BETWEEN '" + year + "-" + month + "-" + billingDay +"' AND '" + nextYear+"-" + nextMonth + "-" + nextBillingDay + "') AS t1;";
-			//System.out.println(getTotalDataUsedQuery);
+
+			String getTotalDataUsedQuery = "SELECT SUM(incoming)+SUM(outgoing) AS total_usage FROM (SELECT incoming, outgoing FROM connections WHERE node_id = "
+					+ nodeID + " AND date(updated_at) BETWEEN '" + year + "-" + month + "-" + billingDay + "' AND '"
+					+ nextYear + "-" + nextMonth + "-" + nextBillingDay + "') AS t1;";
+			// System.out.println(getTotalDataUsedQuery);
 			double totalDataUsed = 0;
 			try {
-				SQLHandler sh= new SQLHandler();
+				SQLHandler sh = new SQLHandler();
 				String r = sh.queryExecute(getTotalDataUsedQuery, 1).get(0);
-				if(r != null) {
+				if (r != null) {
 					totalDataUsed = Double.parseDouble(r);
-				}
-				else {
+				} else {
 					totalDataUsed = 0;
 				}
 			} catch (ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
 			}
-			//in bytes, convert to gb
-			totalDataUsed = totalDataUsed/(1024.0 * 1024.0 * 1024.0);
+			// in bytes, convert to gb
+			totalDataUsed = totalDataUsed / (1024.0 * 1024.0 * 1024.0);
 			System.out.println(nodeID + ": " + Math.round(totalDataUsed * 100.0) / 100.0);
-			
+
 			driver.get(URL + "/node/" + nodeID);
 			(new WebDriverWait(driver, TIMEOUT_SEC)).until(new ExpectedCondition<Boolean>() {
 				public Boolean apply(WebDriver d) {
-					return d.findElements(By.cssSelector("h1#total-used-data > span")).size() > 0 && d.findElements(By.cssSelector("h1#total-used-data > span")).get(0).getText().length() > 0;
+					return d.findElements(By.cssSelector("h1#total-used-data > span")).size() > 0 && d
+							.findElements(By.cssSelector("h1#total-used-data > span")).get(0).getText().length() > 0;
 				}
 			});
 			mobileElement = driver.findElements(By.cssSelector("h1#total-used-data > span")).get(0);
-			Assert.assertEquals(Math.round(totalDataUsed * 100.0) / 100.0, Double.parseDouble(mobileElement.getText()), 0.01);
+			System.out.println("");
+			Assert.assertEquals(Math.round(totalDataUsed * 100.0) / 100.0, Double.parseDouble(mobileElement.getText()),
+					0.01);
 		}
 	}
-	
-	
+
+	@Test(description = "Tests the updation of shared data")
+	public void dataSharedUpdation() {
+
+	}
 
 	@Test(description = "Tests the data allocation for a user.")
 	public void dataAllocation() {
