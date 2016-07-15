@@ -41,4 +41,17 @@ public class SQLHandler {
 
 		return result;
 	}
+	
+	public List<ArrayList<String>> queryExecuteList(String q, int numCols) throws SQLException {
+		List<ArrayList<String>> res = new ArrayList<>();
+		ResultSet rs = stmt.executeQuery(q);
+		while(rs.next()) {
+			ArrayList<String> temp = new ArrayList<String>();
+			for(int i = 0; i < numCols; i++) {
+				temp.add(rs.getString(i+1));
+			}
+			res.add(temp);
+		}
+		return res;
+	}
 }

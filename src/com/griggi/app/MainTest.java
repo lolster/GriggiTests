@@ -277,23 +277,22 @@ public class MainTest {
 			double karmaData = 0; // gb
 			double freeData = 0; // gb
 			double usedData = 0; // mb
-			double maxUserData = 0; //gb
+			double maxUserData = 0; // gb
 			List<String> tempList = new ArrayList<>();
 
-			//getting maxUserData
+			// getting maxUserData
 			try {
 				SQLHandler sh = new SQLHandler();
 				String t = sh.queryExecute(maxUserDataQuery + nodeID, 1).get(0);
-				if(t != null) {
+				if (t != null) {
 					maxUserData = Double.parseDouble(t);
-				}
-				else {
+				} else {
 					maxUserData = -1;
 				}
 			} catch (ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
 			}
-			
+
 			// getting karma data
 			try {
 				SQLHandler sh = new SQLHandler();
@@ -344,13 +343,13 @@ public class MainTest {
 			// rounding to 2 decimal places
 			// available quota = min(maxuserdata, freedata+karmadata-useddata)
 			double availableQuota = 0;
-			if(maxUserData != -1) {
-				availableQuota = Math.min(maxUserData, Math.round((karmaData + freeData - (usedData / 1024.0)) * 100.0) / 100.0);
-			}
-			else {
+			if (maxUserData != -1) {
+				availableQuota = Math.min(maxUserData,
+						Math.round((karmaData + freeData - (usedData / 1024.0)) * 100.0) / 100.0);
+			} else {
 				availableQuota = Math.round((karmaData + freeData - (usedData / 1024.0)) * 100.0) / 100.0;
 			}
-			
+
 			driver.get(URL + "/node/" + nodeID);
 			// need to wait until the content of the required widget/box in
 			// dashboard is loaded
@@ -388,8 +387,7 @@ public class MainTest {
 					e.printStackTrace();
 				}
 				Assert.assertEquals(maxUserDataTemp + " GB", list.get(1).getText().trim());
-			}
-			else {
+			} else {
 				List<WebElement> list = driver.findElements(By.cssSelector("h1#avail-quota ~ small span.text-success"));
 				Assert.assertEquals(Math.round((usedData / 1024) * 100.0) / 100.0,
 						Double.parseDouble(list.get(0).getText().trim().split(" ")[0]), DELTA);
@@ -397,8 +395,6 @@ public class MainTest {
 		}
 	}
 
-	
-	
 	@Test(description = "Tests the router fup limit shown to user in dashboard")
 	public void routerFUPLimit() {
 		Calendar c = Calendar.getInstance();
@@ -465,21 +461,21 @@ public class MainTest {
 
 	@Test(description = "Tests the data sharing feature")
 	public void dataSharing() {
-		/* Timeline of test:
-		 * Check if DATA_SHARE_USER has existing entry in sharedata for DATA_SHARE_NODE and USERNAME
-		 * Delete DATA_USER_SHARE entry in sharedata for DATA_SHARE_NODE and USERNAME if exists
-		 * Share data to a new user
-		 * Increase the data shared
-		 * Reduce the data shared
+		/*
+		 * Timeline of test: Check if DATA_SHARE_USER has existing entry in
+		 * sharedata for DATA_SHARE_NODE and USERNAME Delete DATA_USER_SHARE
+		 * entry in sharedata for DATA_SHARE_NODE and USERNAME if exists Share
+		 * data to a new user Increase the data shared Reduce the data shared
 		 * Delete entry
-		 * */
-		
-		//check DATA_SHARE_USER entry exists and delete if necessary
-		String dataShareIdQ = "select id from sharedatas where nodeid=" + DATA_SHARE_NODE + " and donorid = " + USERNAME + " and userid = " + DATA_SHARE_USER;
+		 */
+
+		// check DATA_SHARE_USER entry exists and delete if necessary
+		String dataShareIdQ = "select id from sharedatas where nodeid=" + DATA_SHARE_NODE + " and donorid = " + USERNAME
+				+ " and userid = " + DATA_SHARE_USER;
 		try {
 			SQLHandler sh = new SQLHandler();
 			List<String> t = sh.queryExecute(dataShareIdQ, 1);
-			if(t.size() != 0) {
+			if (t.size() != 0) {
 				Assert.assertEquals(1, t.size());
 				Assert.assertNotNull(t.get(0));
 				driver.get(URL + "/sharedata/delete?id=" + t.get(0).toString());
@@ -487,10 +483,10 @@ public class MainTest {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		
-		//fetch current value of avail_quota
-		//if not above certain limit, will fail the test
-		//needs atleast 10gb avail_quota for test
+
+		// fetch current value of avail_quota
+		// if not above certain limit, will fail the test
+		// needs atleast 10gb avail_quota for test
 		Double availQuota = 0d;
 		driver.get(URL + "/node/" + DATA_SHARE_NODE);
 		(new WebDriverWait(driver, TIMEOUT_SEC)).until(new ExpectedCondition<Boolean>() {
@@ -500,12 +496,12 @@ public class MainTest {
 		});
 		mobileElement = driver.findElement(By.cssSelector("h1#avail-quota > span"));
 		availQuota = Double.parseDouble(mobileElement.getText().trim().split(" ")[0]);
-		if(availQuota < 10) {
+		if (availQuota < 10) {
 			System.out.println("Cannot perform data-share test - user does not have atleast than 10 gb of data");
-			Assert.assertEquals(10.0, availQuota, 0.0); //see message above
+			Assert.assertEquals(10.0, availQuota, 0.0); // see message above
 		}
-		
-		//share 8 gb
+
+		// share 8 gb
 		driver.get(URL + "/sharedata/node/" + DATA_SHARE_NODE + "/sharedata/new");
 		mobileElement = driver.findElement(By.cssSelector("input#sharedata_userid.form-control"));
 		mobileElement.sendKeys(DATA_SHARE_USER);
@@ -520,8 +516,10 @@ public class MainTest {
 		});
 		mobileElement = driver.findElement(By.cssSelector("h1#avail-quota > span"));
 		Assert.assertEquals(availQuota - 8, Double.parseDouble(mobileElement.getText().trim().split(" ")[0]), DELTA);
-		
-		//String dataShareIdQ = "select id from sharedatas where nodeid=" + DATA_SHARE_NODE + " and donorid = " + USERNAME + " and userid = " + DATA_SHARE_USER;
+
+		// String dataShareIdQ = "select id from sharedatas where nodeid=" +
+		// DATA_SHARE_NODE + " and donorid = " + USERNAME + " and userid = " +
+		// DATA_SHARE_USER;
 		String dataShareID = "";
 		try {
 			SQLHandler sh = new SQLHandler();
@@ -532,14 +530,14 @@ public class MainTest {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		
-		//increase to 10 gb
+
+		// increase to 10 gb
 		driver.get(URL + "/sharedata/edit?id=" + dataShareID);
 		mobileElement = driver.findElement(By.cssSelector("input#sharedata_sharedata.form-control"));
 		mobileElement.clear();
 		mobileElement.sendKeys("10");
 		mobileElement.submit();
-		//driver.get(URL + "/node/" + DATA_SHARE_NODE);
+		// driver.get(URL + "/node/" + DATA_SHARE_NODE);
 		(new WebDriverWait(driver, TIMEOUT_SEC)).until(new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver d) {
 				return d.findElement(By.cssSelector("h1#avail-quota > span")).getText().length() > 0;
@@ -547,14 +545,14 @@ public class MainTest {
 		});
 		mobileElement = driver.findElement(By.cssSelector("h1#avail-quota > span"));
 		Assert.assertEquals(availQuota - 10, Double.parseDouble(mobileElement.getText().trim().split(" ")[0]), DELTA);
-		
-		//reduce to 5gb
+
+		// reduce to 5gb
 		driver.get(URL + "/sharedata/edit?id=" + dataShareID);
 		mobileElement = driver.findElement(By.cssSelector("input#sharedata_sharedata.form-control"));
 		mobileElement.clear();
 		mobileElement.sendKeys("5");
 		mobileElement.submit();
-		//driver.get(URL + "/node/" + DATA_SHARE_NODE);
+		// driver.get(URL + "/node/" + DATA_SHARE_NODE);
 		(new WebDriverWait(driver, TIMEOUT_SEC)).until(new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver d) {
 				return d.findElement(By.cssSelector("h1#avail-quota > span")).getText().length() > 0;
@@ -562,8 +560,8 @@ public class MainTest {
 		});
 		mobileElement = driver.findElement(By.cssSelector("h1#avail-quota > span"));
 		Assert.assertEquals(availQuota - 5, Double.parseDouble(mobileElement.getText().trim().split(" ")[0]), DELTA);
-		
-		//delete entry
+
+		// delete entry
 		driver.get(URL + "/sharedata/delete?id=" + dataShareID);
 		driver.get(URL + "/node/" + DATA_SHARE_NODE);
 		(new WebDriverWait(driver, TIMEOUT_SEC)).until(new ExpectedCondition<Boolean>() {
@@ -575,96 +573,109 @@ public class MainTest {
 		Assert.assertEquals(availQuota, Double.parseDouble(mobileElement.getText().trim().split(" ")[0]), DELTA);
 	}
 
-	@Test(description = "Tests the data allocation for a user.")
-	public void dataAllocation() {
-		/*
-		 * Tests the data allocation for a single user on his admin node to
-		 * himself. Reset the data allocated to 0GB Set to 100GB Reset to 0GB
-		 * QUICK AND DIRTY, TO BE CLEANED UP
-		 */
+	@Test(description = "Checks the data that has been shared to the user on all the nodes")
+	public void dataRecieved() {
+		String getDataShared = "SELECT sharedata, donorid FROM `sharedatas` where userid=" + USERNAME + " and nodeid=";
+		System.out.println(nodeListId);
+		for (String nodeID : nodeListId) {
+			// get the data shared to USERNAME on this nodeID
+			List<ArrayList<String>> dataSharedList = null;
+			try {
+				SQLHandler sh = new SQLHandler();
+				dataSharedList = sh.queryExecuteList(getDataShared + nodeID, 2);
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+			}
 
-		int id = 1734; // id for 9535354545 on nodeid 2 in userdatas
-		String initAmt = "0";
-		String finalAmt = "100";
-		String q = "select freedata from userdatas where id = " + id;
-		SQLHandler sh;
-		String dataAllocated = "NA";
+			driver.get(URL + "/node/" + nodeID);
+			(new WebDriverWait(driver, TIMEOUT_SEC))
+					.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("table#table-data-recieved")));
+			mobileElement = driver.findElement(By.cssSelector("table#table-data-recieved"));
+			List<WebElement> tableRows = mobileElement.findElements(By.cssSelector("tbody tr"));
+			// alt
+			/*
+			 * List<WebElement> tableRows =
+			 * mobileElement.findElements(By.cssSelector(
+			 * "table#table-data-recieved tbody tr"));
+			 */
 
-		// selecting the user to allocate and deallocate to.
-		String adminCheckQuery = "select id from nodes where public_phone_number = " + USERNAME + " limit 1;";
-		String userSelectQuery = "select id from userdatas where nodeid = ";
-		try {
-			sh = new SQLHandler();
-			List<String> temp = sh.queryExecute(adminCheckQuery, 1); //
-			if (temp.size() > 0) {
-				for (String w : temp) {
-					List<String> tempUsers = sh.queryExecute(userSelectQuery + w, 1); //
-					if (tempUsers.size() > 0) {
-						id = Integer.parseInt(tempUsers.get(0));
-						break;
-					}
+			if (dataSharedList.size() == 0) {
+				// the table should appear with no rows
+				Assert.assertEquals(0, tableRows.size());
+			} else {
+				// table should appear with rows
+				//same number of rows
+				Assert.assertEquals(dataSharedList.size(), tableRows.size());
+				for(int i = 0; i < tableRows.size(); i++) {
+					WebElement row = tableRows.get(i);
+					//need to wait for a few seconds while table is loaded for some reason
+					try { Thread.sleep(1000); } catch(InterruptedException e) { e.printStackTrace(); }  
+					List<WebElement> cells = row.findElements(By.cssSelector("td"));
+					Assert.assertEquals(dataSharedList.get(i).get(0).trim(), cells.get(0).getText().trim());
+					Assert.assertEquals(dataSharedList.get(i).get(1).trim(), cells.get(1).getText().trim());
 				}
-				// if we get here, then the user's admin nodes do not have any
-				// person connected to them.
-				System.out.println("[dataAllocation] " + USERNAME + " has no one connected to admin nodes.");
-				return;
 			}
-			// exit if user has no admin nodes
-			else {
-				System.out.println("[dataAllocation] " + USERNAME + " has no admin nodes.");
-				return;
-			}
-		} catch (ClassNotFoundException | SQLException e1) {
-			e1.printStackTrace();
 		}
-
-		// add 0gb to user on his admin node
-		driver.get("http://authpuppy.localhost.com/userdata/edit?id=" + id);
-		mobileElement = driver.findElement(By.cssSelector("input#userdata_freedata"));
-		mobileElement.clear();
-		mobileElement.sendKeys(initAmt);
-		mobileElement.submit();
-
-		try {
-			sh = new SQLHandler();
-			dataAllocated = sh.queryExecute(q, 1).get(0).toString();
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
-		Assert.assertEquals(initAmt, dataAllocated);
-
-		// add 100gb to user on his admin node
-		driver.get("http://authpuppy.localhost.com/userdata/edit?id=" + id);
-		mobileElement = driver.findElement(By.cssSelector("input#userdata_freedata"));
-		mobileElement.clear();
-		mobileElement.sendKeys(finalAmt);
-		mobileElement.submit();
-
-		try {
-			sh = new SQLHandler();
-			dataAllocated = sh.queryExecute(q, 1).get(0).toString();
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
-		Assert.assertEquals(finalAmt, dataAllocated);
-
-		// add 100gb to user on his admin node
-		driver.get("http://authpuppy.localhost.com/userdata/edit?id=" + id);
-		mobileElement = driver.findElement(By.cssSelector("input#userdata_freedata"));
-		mobileElement.clear();
-		mobileElement.sendKeys(initAmt);
-		mobileElement.submit();
-
-		// one final check, since we can do it, why not
-		try {
-			sh = new SQLHandler();
-			dataAllocated = sh.queryExecute(q, 1).get(0).toString();
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
-		Assert.assertEquals(initAmt, dataAllocated);
-
 	}
+
+	/*
+	 * @Test(description = "Tests the data allocation for a user.") public void
+	 * dataAllocation() { int id = 1734; // id for 9535354545 on nodeid 2 in
+	 * userdatas String initAmt = "0"; String finalAmt = "100"; String q =
+	 * "select freedata from userdatas where id = " + id; SQLHandler sh; String
+	 * dataAllocated = "NA";
+	 * 
+	 * // selecting the user to allocate and deallocate to. String
+	 * adminCheckQuery = "select id from nodes where public_phone_number = " +
+	 * USERNAME + " limit 1;"; String userSelectQuery =
+	 * "select id from userdatas where nodeid = "; try { sh = new SQLHandler();
+	 * List<String> temp = sh.queryExecute(adminCheckQuery, 1); // if
+	 * (temp.size() > 0) { for (String w : temp) { List<String> tempUsers =
+	 * sh.queryExecute(userSelectQuery + w, 1); // if (tempUsers.size() > 0) {
+	 * id = Integer.parseInt(tempUsers.get(0)); break; } } // if we get here,
+	 * then the user's admin nodes do not have any // person connected to them.
+	 * System.out.println("[dataAllocation] " + USERNAME +
+	 * " has no one connected to admin nodes."); return; } // exit if user has
+	 * no admin nodes else { System.out.println("[dataAllocation] " + USERNAME +
+	 * " has no admin nodes."); return; } } catch (ClassNotFoundException |
+	 * SQLException e1) { e1.printStackTrace(); }
+	 * 
+	 * // add 0gb to user on his admin node
+	 * driver.get("http://authpuppy.localhost.com/userdata/edit?id=" + id);
+	 * mobileElement =
+	 * driver.findElement(By.cssSelector("input#userdata_freedata"));
+	 * mobileElement.clear(); mobileElement.sendKeys(initAmt);
+	 * mobileElement.submit();
+	 * 
+	 * try { sh = new SQLHandler(); dataAllocated = sh.queryExecute(q,
+	 * 1).get(0).toString(); } catch (ClassNotFoundException | SQLException e) {
+	 * e.printStackTrace(); } Assert.assertEquals(initAmt, dataAllocated);
+	 * 
+	 * // add 100gb to user on his admin node
+	 * driver.get("http://authpuppy.localhost.com/userdata/edit?id=" + id);
+	 * mobileElement =
+	 * driver.findElement(By.cssSelector("input#userdata_freedata"));
+	 * mobileElement.clear(); mobileElement.sendKeys(finalAmt);
+	 * mobileElement.submit();
+	 * 
+	 * try { sh = new SQLHandler(); dataAllocated = sh.queryExecute(q,
+	 * 1).get(0).toString(); } catch (ClassNotFoundException | SQLException e) {
+	 * e.printStackTrace(); } Assert.assertEquals(finalAmt, dataAllocated);
+	 * 
+	 * // add 100gb to user on his admin node
+	 * driver.get("http://authpuppy.localhost.com/userdata/edit?id=" + id);
+	 * mobileElement =
+	 * driver.findElement(By.cssSelector("input#userdata_freedata"));
+	 * mobileElement.clear(); mobileElement.sendKeys(initAmt);
+	 * mobileElement.submit();
+	 * 
+	 * // one final check, since we can do it, why not try { sh = new
+	 * SQLHandler(); dataAllocated = sh.queryExecute(q, 1).get(0).toString(); }
+	 * catch (ClassNotFoundException | SQLException e) { e.printStackTrace(); }
+	 * Assert.assertEquals(initAmt, dataAllocated);
+	 * 
+	 * }
+	 */
 
 	@Test(description = "Tests the UI for the data topup page - I")
 	public void dataTopUpUI1() {

@@ -29,6 +29,7 @@
 				<include name="availableQuota" />
 				<include name="dataSharing" />
 				<include name="routerFUPLimit" />
+				<include name="dataRecieved" />
 				
 				
 				

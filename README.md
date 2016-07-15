@@ -7,3 +7,5 @@
 
 ## Latest bugs
 + The router fup widget is not adding `incoming` and `outgoing` data from the connection table. It is only adding from the `incoming` column. 
++ Figured out the round out problem/bug in available quota widget.
++ Figured out the router fup only adding up incoming bytes bug.
