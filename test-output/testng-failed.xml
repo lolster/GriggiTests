@@ -2,9 +2,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Suite]">
   <parameter name="delta-comparisons" value="0.01"/>
+  <parameter name="data-share-user" value="9945164033"/>
   <parameter name="username" value="9538155667"/>
   <parameter name="id_username_input" value="pocha_pocha_mobile"/>
   <parameter name="timeout_sec" value="5"/>
+  <parameter name="data-share-node" value="2"/>
   <parameter name="id_password_input" value="apAuthLocalUser_password"/>
   <parameter name="base_url" value="http://authpuppy.localhost.com"/>
   <parameter name="password" value="aura1234"/>
@@ -13,7 +15,9 @@
       <class name="com.griggi.app.MainTest">
         <methods>
           <include name="beforeTest"/>
+          <include name="routerFUPLimit"/>
           <include name="nodeAdminDropdownArrow"/>
+          <include name="availableQuota"/>
           <include name="afterTest"/>
           <include name="loginGood2"/>
         </methods>

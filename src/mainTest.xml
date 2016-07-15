@@ -7,6 +7,8 @@
 	<parameter name="id_password_input" value="apAuthLocalUser_password" />
 	<parameter name="timeout_sec" value="5" />
 	<parameter name="delta-comparisons" value="0.01" />
+	<parameter name="data-share-node" value="2" />
+	<parameter name="data-share-user" value="9945164033" />
 
 	<test name="Test">
 		<classes>
@@ -24,9 +26,15 @@
 				<include name="listOfNodes" />
 				<include name="nodeAdminDropdownArrow" />
 				<include name="routerSpeed" />
-				<!--<include name="dataAllocation" />-->
 				<include name="availableQuota" />
-				<!--<include name="routerFUPLimit" />-->
+				<include name="dataSharing" />
+				<include name="routerFUPLimit" />
+				
+				
+				
+				
+				
+				
 				<!--
 				<include name="dataTopUpUI1" />
 				<include name="dataTopUpUI2" />

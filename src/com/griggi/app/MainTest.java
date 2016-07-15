@@ -24,6 +24,8 @@ public class MainTest {
 	private static String URL;
 	private static String USERNAME;
 	private static String PASSWORD;
+	private static String DATA_SHARE_NODE;
+	private static String DATA_SHARE_USER;
 	private static int TIMEOUT_SEC;
 	private static Double DELTA;
 	private static List<String> nodeList; // list of all nodes related to the
@@ -275,8 +277,23 @@ public class MainTest {
 			double karmaData = 0; // gb
 			double freeData = 0; // gb
 			double usedData = 0; // mb
+			double maxUserData = 0; //gb
 			List<String> tempList = new ArrayList<>();
 
+			//getting maxUserData
+			try {
+				SQLHandler sh = new SQLHandler();
+				String t = sh.queryExecute(maxUserDataQuery + nodeID, 1).get(0);
+				if(t != null) {
+					maxUserData = Double.parseDouble(t);
+				}
+				else {
+					maxUserData = -1;
+				}
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+			}
+			
 			// getting karma data
 			try {
 				SQLHandler sh = new SQLHandler();
@@ -296,6 +313,7 @@ public class MainTest {
 			// getting freedata
 			try {
 				SQLHandler sh = new SQLHandler();
+				System.out.println(freeDataQuery + nodeID);
 				tempList = sh.queryExecute(freeDataQuery + nodeID, 1);
 			} catch (ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
@@ -324,8 +342,15 @@ public class MainTest {
 			}
 
 			// rounding to 2 decimal places
-			double availableQuota = Math.round((karmaData + freeData - (usedData / 1024.0)) * 100.0) / 100.0;
-
+			// available quota = min(maxuserdata, freedata+karmadata-useddata)
+			double availableQuota = 0;
+			if(maxUserData != -1) {
+				availableQuota = Math.min(maxUserData, Math.round((karmaData + freeData - (usedData / 1024.0)) * 100.0) / 100.0);
+			}
+			else {
+				availableQuota = Math.round((karmaData + freeData - (usedData / 1024.0)) * 100.0) / 100.0;
+			}
+			
 			driver.get(URL + "/node/" + nodeID);
 			// need to wait until the content of the required widget/box in
 			// dashboard is loaded
@@ -355,14 +380,14 @@ public class MainTest {
 				List<WebElement> list = driver.findElements(By.cssSelector("h1#avail-quota ~ small span.text-success"));
 				Assert.assertEquals(Math.round((usedData / 1024) * 100.0) / 100.0,
 						Double.parseDouble(list.get(0).getText().trim().split(" ")[0]), DELTA);
-				String maxUserData = "";
+				String maxUserDataTemp = "";
 				try {
 					SQLHandler sh = new SQLHandler();
-					maxUserData = sh.queryExecute(maxUserDataQuery + nodeID, 1).get(0);
+					maxUserDataTemp = sh.queryExecute(maxUserDataQuery + nodeID, 1).get(0);
 				} catch (ClassNotFoundException | SQLException e) {
 					e.printStackTrace();
 				}
-				Assert.assertEquals(maxUserData + " GB", list.get(1).getText().trim());
+				Assert.assertEquals(maxUserDataTemp + " GB", list.get(1).getText().trim());
 			}
 			else {
 				List<WebElement> list = driver.findElements(By.cssSelector("h1#avail-quota ~ small span.text-success"));
@@ -438,9 +463,116 @@ public class MainTest {
 		}
 	}
 
-	@Test(description = "Tests the updation of shared data")
-	public void dataSharedUpdation() {
-
+	@Test(description = "Tests the data sharing feature")
+	public void dataSharing() {
+		/* Timeline of test:
+		 * Check if DATA_SHARE_USER has existing entry in sharedata for DATA_SHARE_NODE and USERNAME
+		 * Delete DATA_USER_SHARE entry in sharedata for DATA_SHARE_NODE and USERNAME if exists
+		 * Share data to a new user
+		 * Increase the data shared
+		 * Reduce the data shared
+		 * Delete entry
+		 * */
+		
+		//check DATA_SHARE_USER entry exists and delete if necessary
+		String dataShareIdQ = "select id from sharedatas where nodeid=" + DATA_SHARE_NODE + " and donorid = " + USERNAME + " and userid = " + DATA_SHARE_USER;
+		try {
+			SQLHandler sh = new SQLHandler();
+			List<String> t = sh.queryExecute(dataShareIdQ, 1);
+			if(t.size() != 0) {
+				Assert.assertEquals(1, t.size());
+				Assert.assertNotNull(t.get(0));
+				driver.get(URL + "/sharedata/delete?id=" + t.get(0).toString());
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		
+		//fetch current value of avail_quota
+		//if not above certain limit, will fail the test
+		//needs atleast 10gb avail_quota for test
+		Double availQuota = 0d;
+		driver.get(URL + "/node/" + DATA_SHARE_NODE);
+		(new WebDriverWait(driver, TIMEOUT_SEC)).until(new ExpectedCondition<Boolean>() {
+			public Boolean apply(WebDriver d) {
+				return d.findElement(By.cssSelector("h1#avail-quota > span")).getText().length() > 0;
+			}
+		});
+		mobileElement = driver.findElement(By.cssSelector("h1#avail-quota > span"));
+		availQuota = Double.parseDouble(mobileElement.getText().trim().split(" ")[0]);
+		if(availQuota < 10) {
+			System.out.println("Cannot perform data-share test - user does not have atleast than 10 gb of data");
+			Assert.assertEquals(10.0, availQuota, 0.0); //see message above
+		}
+		
+		//share 8 gb
+		driver.get(URL + "/sharedata/node/" + DATA_SHARE_NODE + "/sharedata/new");
+		mobileElement = driver.findElement(By.cssSelector("input#sharedata_userid.form-control"));
+		mobileElement.sendKeys(DATA_SHARE_USER);
+		mobileElement = driver.findElement(By.cssSelector("input#sharedata_sharedata.form-control"));
+		mobileElement.sendKeys("8");
+		mobileElement.submit();
+		driver.get(URL + "/node/" + DATA_SHARE_NODE);
+		(new WebDriverWait(driver, TIMEOUT_SEC)).until(new ExpectedCondition<Boolean>() {
+			public Boolean apply(WebDriver d) {
+				return d.findElement(By.cssSelector("h1#avail-quota > span")).getText().length() > 0;
+			}
+		});
+		mobileElement = driver.findElement(By.cssSelector("h1#avail-quota > span"));
+		Assert.assertEquals(availQuota - 8, Double.parseDouble(mobileElement.getText().trim().split(" ")[0]), DELTA);
+		
+		//String dataShareIdQ = "select id from sharedatas where nodeid=" + DATA_SHARE_NODE + " and donorid = " + USERNAME + " and userid = " + DATA_SHARE_USER;
+		String dataShareID = "";
+		try {
+			SQLHandler sh = new SQLHandler();
+			List<String> t = sh.queryExecute(dataShareIdQ, 1);
+			Assert.assertEquals(1, t.size());
+			Assert.assertNotNull(t.get(0));
+			dataShareID = t.get(0).toString();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		
+		//increase to 10 gb
+		driver.get(URL + "/sharedata/edit?id=" + dataShareID);
+		mobileElement = driver.findElement(By.cssSelector("input#sharedata_sharedata.form-control"));
+		mobileElement.clear();
+		mobileElement.sendKeys("10");
+		mobileElement.submit();
+		//driver.get(URL + "/node/" + DATA_SHARE_NODE);
+		(new WebDriverWait(driver, TIMEOUT_SEC)).until(new ExpectedCondition<Boolean>() {
+			public Boolean apply(WebDriver d) {
+				return d.findElement(By.cssSelector("h1#avail-quota > span")).getText().length() > 0;
+			}
+		});
+		mobileElement = driver.findElement(By.cssSelector("h1#avail-quota > span"));
+		Assert.assertEquals(availQuota - 10, Double.parseDouble(mobileElement.getText().trim().split(" ")[0]), DELTA);
+		
+		//reduce to 5gb
+		driver.get(URL + "/sharedata/edit?id=" + dataShareID);
+		mobileElement = driver.findElement(By.cssSelector("input#sharedata_sharedata.form-control"));
+		mobileElement.clear();
+		mobileElement.sendKeys("5");
+		mobileElement.submit();
+		//driver.get(URL + "/node/" + DATA_SHARE_NODE);
+		(new WebDriverWait(driver, TIMEOUT_SEC)).until(new ExpectedCondition<Boolean>() {
+			public Boolean apply(WebDriver d) {
+				return d.findElement(By.cssSelector("h1#avail-quota > span")).getText().length() > 0;
+			}
+		});
+		mobileElement = driver.findElement(By.cssSelector("h1#avail-quota > span"));
+		Assert.assertEquals(availQuota - 5, Double.parseDouble(mobileElement.getText().trim().split(" ")[0]), DELTA);
+		
+		//delete entry
+		driver.get(URL + "/sharedata/delete?id=" + dataShareID);
+		driver.get(URL + "/node/" + DATA_SHARE_NODE);
+		(new WebDriverWait(driver, TIMEOUT_SEC)).until(new ExpectedCondition<Boolean>() {
+			public Boolean apply(WebDriver d) {
+				return d.findElement(By.cssSelector("h1#avail-quota > span")).getText().length() > 0;
+			}
+		});
+		mobileElement = driver.findElement(By.cssSelector("h1#avail-quota > span"));
+		Assert.assertEquals(availQuota, Double.parseDouble(mobileElement.getText().trim().split(" ")[0]), DELTA);
 	}
 
 	@Test(description = "Tests the data allocation for a user.")
@@ -620,6 +752,8 @@ public class MainTest {
 		PASSWORD = context.getCurrentXmlTest().getParameter("password");
 		TIMEOUT_SEC = Integer.parseInt(context.getCurrentXmlTest().getParameter("timeout_sec"));
 		DELTA = Double.parseDouble(context.getCurrentXmlTest().getParameter("delta-comparisons"));
+		DATA_SHARE_NODE = context.getCurrentXmlTest().getParameter("data-share-node");
+		DATA_SHARE_USER = context.getCurrentXmlTest().getParameter("data-share-user");
 	}
 
 	@AfterTest

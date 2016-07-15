@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="2" total="13" passed="11">
+<testng-results skipped="0" failed="4" total="15" passed="11">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="25496" started-at="2016-07-14T18:06:55Z" finished-at="2016-07-14T18:07:21Z">
+  <suite name="Suite" duration-ms="53756" started-at="2016-07-15T12:01:42Z" finished-at="2016-07-15T12:02:35Z">
     <groups>
     </groups>
-    <test name="Test" duration-ms="25496" started-at="2016-07-14T18:06:55Z" finished-at="2016-07-14T18:07:21Z">
+    <test name="Test" duration-ms="53756" started-at="2016-07-15T12:01:42Z" finished-at="2016-07-15T12:02:35Z">
       <class name="com.griggi.app.MainTest">
-        <test-method status="PASS" signature="beforeTest(org.testng.ITestContext)[pri:0, instance:com.griggi.app.MainTest@313179e3]" name="beforeTest" is-config="true" duration-ms="1879" started-at="2016-07-14T23:36:55Z" finished-at="2016-07-14T23:36:57Z">
+        <test-method status="PASS" signature="beforeTest(org.testng.ITestContext)[pri:0, instance:com.griggi.app.MainTest@6a0037a4]" name="beforeTest" is-config="true" duration-ms="1947" started-at="2016-07-15T17:31:42Z" finished-at="2016-07-15T17:31:44Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@ff0ccbd]]>
+                <![CDATA[org.testng.TestRunner@1d2d013a]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeTest -->
-        <test-method status="PASS" signature="loginBad1()[pri:0, instance:com.griggi.app.MainTest@313179e3]" name="loginBad1" duration-ms="1492" started-at="2016-07-14T23:36:57Z" description="Logging in. - Too long" finished-at="2016-07-14T23:36:58Z">
+        <test-method status="PASS" signature="loginBad1()[pri:0, instance:com.griggi.app.MainTest@6a0037a4]" name="loginBad1" duration-ms="1396" started-at="2016-07-15T17:31:44Z" description="Logging in. - Too long" finished-at="2016-07-15T17:31:45Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginBad1 -->
-        <test-method status="PASS" signature="loginBad2()[pri:0, instance:com.griggi.app.MainTest@313179e3]" name="loginBad2" duration-ms="855" started-at="2016-07-14T23:36:58Z" description="Logging in. - Too short" finished-at="2016-07-14T23:36:59Z">
+        <test-method status="PASS" signature="loginBad2()[pri:0, instance:com.griggi.app.MainTest@6a0037a4]" name="loginBad2" duration-ms="832" started-at="2016-07-15T17:31:45Z" description="Logging in. - Too short" finished-at="2016-07-15T17:31:46Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginBad2 -->
-        <test-method status="PASS" signature="loginBad3()[pri:0, instance:com.griggi.app.MainTest@313179e3]" name="loginBad3" duration-ms="988" started-at="2016-07-14T23:36:59Z" description="Logging in. - Invalid" finished-at="2016-07-14T23:37:00Z">
+        <test-method status="PASS" signature="loginBad3()[pri:0, instance:com.griggi.app.MainTest@6a0037a4]" name="loginBad3" duration-ms="1008" started-at="2016-07-15T17:31:46Z" description="Logging in. - Invalid" finished-at="2016-07-15T17:31:47Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginBad3 -->
-        <test-method status="FAIL" signature="loginGood2()[pri:0, instance:com.griggi.app.MainTest@313179e3]" name="loginGood2" duration-ms="2194" started-at="2016-07-14T23:37:00Z" description="Verifies that after a bad login, user can enter" finished-at="2016-07-14T23:37:02Z">
+        <test-method status="FAIL" signature="loginGood2()[pri:0, instance:com.griggi.app.MainTest@6a0037a4]" name="loginGood2" duration-ms="2010" started-at="2016-07-15T17:31:47Z" description="Verifies that after a bad login, user can enter" finished-at="2016-07-15T17:31:49Z">
           <exception class="org.junit.ComparisonFailure">
             <message>
               <![CDATA[expected:<[The password you entered is not valid.]> but was:<[]>]]>
@@ -39,7 +39,7 @@
               <![CDATA[org.junit.ComparisonFailure: expected:<[The password you entered is not valid.]> but was:<[]>
 	at org.junit.Assert.assertEquals(Assert.java:115)
 	at org.junit.Assert.assertEquals(Assert.java:144)
-	at com.griggi.app.MainTest.loginGood2(MainTest.java:123)
+	at com.griggi.app.MainTest.loginGood2(MainTest.java:125)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -70,31 +70,31 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginGood2 -->
-        <test-method status="PASS" signature="loginGood1()[pri:0, instance:com.griggi.app.MainTest@313179e3]" name="loginGood1" duration-ms="2111" started-at="2016-07-14T23:37:03Z" description="Logging in. - GOOD" finished-at="2016-07-14T23:37:05Z">
+        <test-method status="PASS" signature="loginGood1()[pri:0, instance:com.griggi.app.MainTest@6a0037a4]" name="loginGood1" duration-ms="2046" started-at="2016-07-15T17:31:49Z" description="Logging in. - GOOD" finished-at="2016-07-15T17:31:51Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginGood1 -->
-        <test-method status="PASS" signature="dashboardUICheck1()[pri:0, instance:com.griggi.app.MainTest@313179e3]" name="dashboardUICheck1" duration-ms="60" started-at="2016-07-14T23:37:05Z" description="Check Dashboard UI - 1 (Nav)" finished-at="2016-07-14T23:37:05Z">
+        <test-method status="PASS" signature="dashboardUICheck1()[pri:0, instance:com.griggi.app.MainTest@6a0037a4]" name="dashboardUICheck1" duration-ms="32" started-at="2016-07-15T17:31:51Z" description="Check Dashboard UI - 1 (Nav)" finished-at="2016-07-15T17:31:51Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- dashboardUICheck1 -->
-        <test-method status="PASS" signature="dashboardUICheck2()[pri:0, instance:com.griggi.app.MainTest@313179e3]" name="dashboardUICheck2" duration-ms="28" started-at="2016-07-14T23:37:05Z" description="Check Dashboard UI - 2 (Widgets)" finished-at="2016-07-14T23:37:05Z">
+        <test-method status="PASS" signature="dashboardUICheck2()[pri:0, instance:com.griggi.app.MainTest@6a0037a4]" name="dashboardUICheck2" duration-ms="15" started-at="2016-07-15T17:31:51Z" description="Check Dashboard UI - 2 (Widgets)" finished-at="2016-07-15T17:31:51Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- dashboardUICheck2 -->
-        <test-method status="PASS" signature="dashboardUICheck3()[pri:0, instance:com.griggi.app.MainTest@313179e3]" name="dashboardUICheck3" duration-ms="19" started-at="2016-07-14T23:37:05Z" description="Check Dashboard UI - 3 (Header)" finished-at="2016-07-14T23:37:05Z">
+        <test-method status="PASS" signature="dashboardUICheck3()[pri:0, instance:com.griggi.app.MainTest@6a0037a4]" name="dashboardUICheck3" duration-ms="19" started-at="2016-07-15T17:31:51Z" description="Check Dashboard UI - 3 (Header)" finished-at="2016-07-15T17:31:51Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- dashboardUICheck3 -->
-        <test-method status="PASS" signature="verifyLatestNodeURL()[pri:0, instance:com.griggi.app.MainTest@313179e3]" name="verifyLatestNodeURL" duration-ms="172" started-at="2016-07-14T23:37:05Z" description="Verify the url for the lastest node on dashboard" finished-at="2016-07-14T23:37:05Z">
+        <test-method status="PASS" signature="verifyLatestNodeURL()[pri:0, instance:com.griggi.app.MainTest@6a0037a4]" name="verifyLatestNodeURL" duration-ms="186" started-at="2016-07-15T17:31:51Z" description="Verify the url for the lastest node on dashboard" finished-at="2016-07-15T17:31:51Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- verifyLatestNodeURL -->
-        <test-method status="PASS" signature="listOfNodes()[pri:0, instance:com.griggi.app.MainTest@313179e3]" name="listOfNodes" duration-ms="538" started-at="2016-07-14T23:37:05Z" description="Verify Nav from database - List of nodes" finished-at="2016-07-14T23:37:05Z">
+        <test-method status="PASS" signature="listOfNodes()[pri:0, instance:com.griggi.app.MainTest@6a0037a4]" name="listOfNodes" duration-ms="435" started-at="2016-07-15T17:31:51Z" description="Verify Nav from database - List of nodes" finished-at="2016-07-15T17:31:52Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- listOfNodes -->
-        <test-method status="FAIL" signature="nodeAdminDropdownArrow()[pri:0, instance:com.griggi.app.MainTest@313179e3]" name="nodeAdminDropdownArrow" duration-ms="32" started-at="2016-07-14T23:37:05Z" description="Admin node arrow exists" finished-at="2016-07-14T23:37:06Z">
+        <test-method status="FAIL" signature="nodeAdminDropdownArrow()[pri:0, instance:com.griggi.app.MainTest@6a0037a4]" name="nodeAdminDropdownArrow" duration-ms="49" started-at="2016-07-15T17:31:52Z" description="Admin node arrow exists" finished-at="2016-07-15T17:31:52Z">
           <exception class="java.lang.AssertionError">
             <full-stacktrace>
               <![CDATA[java.lang.AssertionError
@@ -102,7 +102,7 @@
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertFalse(Assert.java:64)
 	at org.junit.Assert.assertFalse(Assert.java:74)
-	at com.griggi.app.MainTest.nodeAdminDropdownArrow(MainTest.java:212)
+	at com.griggi.app.MainTest.nodeAdminDropdownArrow(MainTest.java:214)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -133,15 +133,99 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nodeAdminDropdownArrow -->
-        <test-method status="PASS" signature="routerSpeed()[pri:0, instance:com.griggi.app.MainTest@313179e3]" name="routerSpeed" duration-ms="7270" started-at="2016-07-14T23:37:06Z" description="Router Speed" finished-at="2016-07-14T23:37:13Z">
+        <test-method status="PASS" signature="routerSpeed()[pri:0, instance:com.griggi.app.MainTest@6a0037a4]" name="routerSpeed" duration-ms="6927" started-at="2016-07-15T17:31:52Z" description="Router Speed" finished-at="2016-07-15T17:31:59Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- routerSpeed -->
-        <test-method status="PASS" signature="availableQuota()[pri:0, instance:com.griggi.app.MainTest@313179e3]" name="availableQuota" duration-ms="7488" started-at="2016-07-14T23:37:13Z" description="Checks the available quota of the user with the DB" finished-at="2016-07-14T23:37:20Z">
+        <test-method status="FAIL" signature="availableQuota()[pri:0, instance:com.griggi.app.MainTest@6a0037a4]" name="availableQuota" duration-ms="6953" started-at="2016-07-15T17:31:59Z" description="Checks the available quota of the user with the DB" finished-at="2016-07-15T17:32:06Z">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[expected:<1.0> but was:<5.0>]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: expected:<1.0> but was:<5.0>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:834)
+	at org.junit.Assert.assertEquals(Assert.java:553)
+	at org.junit.Assert.assertEquals(Assert.java:683)
+	at com.griggi.app.MainTest.availableQuota(MainTest.java:376)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:816)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1124)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:774)
+	at org.testng.TestRunner.run(TestRunner.java:624)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:359)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:354)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:312)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:261)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1215)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1140)
+	at org.testng.TestNG.run(TestNG.java:1048)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:137)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:58)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- availableQuota -->
-        <test-method status="PASS" signature="afterTest()[pri:0, instance:com.griggi.app.MainTest@313179e3]" name="afterTest" is-config="true" duration-ms="195" started-at="2016-07-14T23:37:20Z" finished-at="2016-07-14T23:37:21Z">
+        <test-method status="PASS" signature="dataSharing()[pri:0, instance:com.griggi.app.MainTest@6a0037a4]" name="dataSharing" duration-ms="24985" started-at="2016-07-15T17:32:06Z" description="Tests the data sharing feature" finished-at="2016-07-15T17:32:31Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- dataSharing -->
+        <test-method status="FAIL" signature="routerFUPLimit()[pri:0, instance:com.griggi.app.MainTest@6a0037a4]" name="routerFUPLimit" duration-ms="4613" started-at="2016-07-15T17:32:31Z" description="Tests the router fup limit shown to user in dashboard" finished-at="2016-07-15T17:32:35Z">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[expected:<0.31> but was:<0.17>]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: expected:<0.31> but was:<0.17>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:834)
+	at org.junit.Assert.assertEquals(Assert.java:553)
+	at org.junit.Assert.assertEquals(Assert.java:683)
+	at com.griggi.app.MainTest.routerFUPLimit(MainTest.java:461)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:816)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1124)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:774)
+	at org.testng.TestRunner.run(TestRunner.java:624)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:359)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:354)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:312)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:261)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1215)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1140)
+	at org.testng.TestNG.run(TestNG.java:1048)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:137)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:58)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- routerFUPLimit -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:com.griggi.app.MainTest@6a0037a4]" name="afterTest" is-config="true" duration-ms="148" started-at="2016-07-15T17:32:35Z" finished-at="2016-07-15T17:32:35Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterTest -->
