@@ -54,4 +54,8 @@ public class SQLHandler {
 		}
 		return res;
 	}
+
+	public void queryExecuteUpdate(String q) throws SQLException {
+		stmt.executeUpdate(q);
+	}
 }

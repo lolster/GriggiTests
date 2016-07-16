@@ -15,10 +15,11 @@
       <class name="com.griggi.app.MainTest">
         <methods>
           <include name="beforeTest"/>
-          <include name="routerFUPLimit"/>
+          <include name="dataTopUpInput"/>
           <include name="nodeAdminDropdownArrow"/>
           <include name="afterTest"/>
           <include name="loginGood2"/>
+          <include name="dataShared"/>
         </methods>
       </class> <!-- com.griggi.app.MainTest -->
     </classes>

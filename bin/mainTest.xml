@@ -21,7 +21,7 @@
 				<include name="loginGood1" />
 				<include name="dashboardUICheck1" />
 				<include name="dashboardUICheck2" />
-				<include name="dashboardUICheck3" />
+				<include name="dashboardUICheck3" />-->
 				<include name="verifyLatestNodeURL" />
 				<include name="listOfNodes" />
 				<include name="nodeAdminDropdownArrow" />
@@ -30,17 +30,12 @@
 				<include name="dataSharing" />
 				<include name="routerFUPLimit" />
 				<include name="dataRecieved" />
-				
-				
-				
-				
-				
-				
-				<!--
+				<include name="dataShared" />
+				<include name="dataSharingReduction"/>
 				<include name="dataTopUpUI1" />
 				<include name="dataTopUpUI2" />
 				<include name="dataTopUpUI3" />
-				<include name="dataTopUpInput" />-->
+				<include name="dataTopUpInput" />
 			</methods>
 		</classes>
 	</test> <!-- Test -->

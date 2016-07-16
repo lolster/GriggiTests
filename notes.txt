@@ -15,3 +15,5 @@ FROM
          AND identity = '7406793110') 
 AS t1;
 query to calculate data used by a user at a node in the billing cycle
+
+7406793110
