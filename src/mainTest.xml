@@ -8,7 +8,7 @@
 	<parameter name="timeout_sec" value="5" />
 	<parameter name="delta-comparisons" value="0.01" />
 	<parameter name="data-share-node" value="2" />
-	<parameter name="data-share-user" value="9945164033" />
+	<parameter name="data-share-user" value="" /> <!-- Replace with the recipient id with which you want to do the data-share tests-->
 
 	<test name="Test">
 		<classes>
